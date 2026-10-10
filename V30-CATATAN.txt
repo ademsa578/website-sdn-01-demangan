@@ -1,0 +1,17 @@
+WEBSITE SDN 01 DEMANGAN V30
+
+Perubahan utama:
+- Tombol Tambah Foto dan kontrol edit/pratinjau publik dihapus dari halaman publik.
+- Halaman /admin/ menjadi pintu masuk ke Pages CMS.
+- Ditambahkan .pages.yml untuk Pages CMS. File halaman HTML bisa diedit oleh pengguna yang punya izin repositori, melalui editor kode HTML.
+- Foto baru yang diunggah ke assets/uploads belum otomatis muncul di galeri: admin harus memperbarui referensi foto pada HTML halaman terkait.
+
+KEAMANAN:
+- Hanya berikan akses tulis repositori GitHub kepada admin yang dipercaya.
+- Jangan membagikan akun/token GitHub.
+- Pengguna yang mengunduh ZIP dapat mengubah salinan lokalnya sendiri; perubahan itu tidak mengubah website online kecuali mereka juga punya akses tulis ke repositori.
+
+CATATAN PAGES CMS:
+- Setelah mengunggah V30, buka https://app.pagescms.org/ dan pilih repositori website-sdn-01-demangan pada branch main.
+- Periksa apakah .pages.yml terdeteksi.
+- Pengaturan CMS memungkinkan pengeditan source HTML, bukan formulir terpisah untuk setiap paragraf. Agar semua tulisan dan galeri punya formulir visual yang mudah dipakai, perlu refaktor lanjutan supaya konten halaman dipisahkan ke data terstruktur yang dibaca oleh website.

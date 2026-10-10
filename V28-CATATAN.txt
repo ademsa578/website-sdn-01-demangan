@@ -1,0 +1,10 @@
+WEBSITE SDN 01 DEMANGAN V28
+
+Pembaruan:
+- Slogan beranda menggunakan gradasi warna dan dibuat agar frasa Akhlak Terpuji tidak dipisahkan secara paksa.
+- Navigasi Tentang diubah menjadi Profil.
+- Halaman detail 6 program unggulan dan 7 ekstrakurikuler mendapat ruang galeri tambahan dengan tombol pratinjau foto.
+- Halaman Prestasi mendapat ruang dokumentasi, kolom nama/keterangan prestasi, dan tautan video.
+- Halaman PKKS memakai judul tengah “Penilaian Kinerja Kepala Sekolah” dan paragraf pengantar digabung.
+
+PENTING: tombol pilih foto pada halaman galeri berfungsi untuk pratinjau sementara di browser, bukan mengunggah otomatis ke website publik. CMS Decap juga masih memerlukan konfigurasi OAuth/proxy GitHub sebelum dapat menyimpan file ke repositori. Jangan masukkan token/password ke file konfigurasi.

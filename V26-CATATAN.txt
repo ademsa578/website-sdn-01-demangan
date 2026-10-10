@@ -1,0 +1,11 @@
+WEBSITE SDN 01 DEMANGAN — V26
+
+Pembaruan:
+1. Slogan halaman Home menjadi Berprestasi, Inovatif, Akhlak Terpuji, Peduli.
+2. Tombol Kenali Sekolah dan Jelajahi Program di halaman Home dihilangkan.
+3. Pita slogan di bagian bawah Home menjadi empat nilai: Berprestasi, Inovatif, Akhlak Terpuji, Peduli.
+4. Setiap kartu Program membuka halaman detail tersendiri dengan foto, ringkasan program, pelaksanaan, dan hasil & dampak.
+5. Setiap kartu Ekstrakurikuler membuka halaman detail tersendiri dengan foto, ringkasan, pelaksanaan, dan hasil & dampak.
+6. Semua aset asli dari V25 dipertahankan dalam folder assets, termasuk subfolder assets/programs.
+
+Untuk GitHub Pages, pastikan index.html berada di root repository dan Pages menggunakan branch main / folder /(root).

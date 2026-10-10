@@ -1,0 +1,25 @@
+WEBSITE SDN 01 DEMANGAN V31
+
+Pembaruan:
+- Memastikan halaman publik tidak menyediakan kontrol unggah foto, tombol tambah foto, atau editor teks langsung. Hal ini berlaku pada Home, Profil, Program, Ekstrakurikuler, Prestasi, PKKS, dan halaman rincian lainnya.
+- Menghapus styling lama untuk tombol unggah publik yang sudah tidak digunakan.
+- Halaman admin mengarahkan admin ke Pages CMS.
+- .pages.yml mencakup semua 91 halaman HTML sehingga admin yang memiliki izin repositori dapat mengedit tulisan dan sumber gambar melalui editor kode Pages CMS.
+- Konfigurasi media Pages CMS memakai path relatif assets/uploads agar sesuai dengan GitHub Pages project site.
+
+KEAMANAN PENTING:
+- Website GitHub Pages bersifat statis. Menyembunyikan tombol di halaman publik bukan mekanisme autentikasi; keamanan perubahan website ditentukan oleh izin tulis GitHub/Pages CMS.
+- Hanya beri izin tulis repositori kepada admin yang dipercaya. Pengunjung tanpa izin tersebut tidak dapat menerbitkan perubahan ke website resmi.
+- Pengguna yang mengunduh ZIP tetap dapat mengubah salinan lokalnya sendiri, tetapi itu tidak mengubah website resmi yang online.
+
+CARA ADMIN MENGEDIT:
+1. Buka /admin/ pada website atau https://app.pagescms.org/.
+2. Masuk menggunakan akun GitHub yang memang memiliki izin mengubah repositori website resmi.
+3. Pilih repositori website-sdn-01-demangan dan branch main.
+4. Buka halaman yang ingin diedit. Koleksi halaman dikonfigurasi sebagai source HTML, sehingga pengeditan tulisan dan referensi gambar dilakukan di kode HTML.
+5. Untuk gambar baru, unggah melalui media Pages CMS ke assets/uploads, lalu perbarui src gambar pada halaman terkait menggunakan path relatif yang sesuai, misalnya assets/uploads/nama-file.jpg.
+6. Simpan/commit perubahan dan tunggu GitHub Pages selesai menerbitkan ulang website.
+
+CATATAN:
+- V31 tidak menyediakan editor visual terpisah per paragraf; Pages CMS saat ini menampilkan file HTML dalam editor kode. Untuk formulir visual yang lebih mudah, struktur konten perlu dipisahkan ke berkas data terstruktur dan website perlu diprogram ulang untuk membacanya.
+- Pastikan .pages.yml dikenali oleh Pages CMS setelah V31 diunggah.

@@ -1,0 +1,459 @@
+media:
+  input: assets/uploads
+  output: assets/uploads
+content:
+  - name: "page-berita"
+    label: "Halaman: Berita"
+    type: file
+    path: "berita.html"
+    format: code
+  - name: "page-ekstra-adiwiyata"
+    label: "Halaman: Ekstra Adiwiyata"
+    type: file
+    path: "ekstra-adiwiyata.html"
+    format: code
+  - name: "page-ekstra-drumband"
+    label: "Halaman: Ekstra Drumband"
+    type: file
+    path: "ekstra-drumband.html"
+    format: code
+  - name: "page-ekstra-futsal"
+    label: "Halaman: Ekstra Futsal"
+    type: file
+    path: "ekstra-futsal.html"
+    format: code
+  - name: "page-ekstra-pmr"
+    label: "Halaman: Ekstra Pmr"
+    type: file
+    path: "ekstra-pmr.html"
+    format: code
+  - name: "page-ekstra-pramuka"
+    label: "Halaman: Ekstra Pramuka"
+    type: file
+    path: "ekstra-pramuka.html"
+    format: code
+  - name: "page-ekstra-seni-tari"
+    label: "Halaman: Ekstra Seni Tari"
+    type: file
+    path: "ekstra-seni-tari.html"
+    format: code
+  - name: "page-ekstra-sepak-takraw"
+    label: "Halaman: Ekstra Sepak Takraw"
+    type: file
+    path: "ekstra-sepak-takraw.html"
+    format: code
+  - name: "page-ekstrakurikuler"
+    label: "Halaman: Ekstrakurikuler"
+    type: file
+    path: "ekstrakurikuler.html"
+    format: code
+  - name: "page-galeri"
+    label: "Halaman: Galeri"
+    type: file
+    path: "galeri.html"
+    format: code
+  - name: "page-index"
+    label: "Halaman: Index"
+    type: file
+    path: "index.html"
+    format: code
+  - name: "page-kontak"
+    label: "Halaman: Kontak"
+    type: file
+    path: "kontak.html"
+    format: code
+  - name: "page-pkks-01-kepribadian-dan-sosial"
+    label: "Halaman: Pkks 01 Kepribadian Dan Sosial"
+    type: file
+    path: "pkks-01-kepribadian-dan-sosial.html"
+    format: code
+  - name: "page-pkks-02-kepemimpinan-pembelajaran"
+    label: "Halaman: Pkks 02 Kepemimpinan Pembelajaran"
+    type: file
+    path: "pkks-02-kepemimpinan-pembelajaran.html"
+    format: code
+  - name: "page-pkks-03-pengembangan-sekolah"
+    label: "Halaman: Pkks 03 Pengembangan Sekolah"
+    type: file
+    path: "pkks-03-pengembangan-sekolah.html"
+    format: code
+  - name: "page-pkks-04-manajemen-sumber-daya"
+    label: "Halaman: Pkks 04 Manajemen Sumber Daya"
+    type: file
+    path: "pkks-04-manajemen-sumber-daya.html"
+    format: code
+  - name: "page-pkks-05-kewirausahaan"
+    label: "Halaman: Pkks 05 Kewirausahaan"
+    type: file
+    path: "pkks-05-kewirausahaan.html"
+    format: code
+  - name: "page-pkks-06-supervisi-pembelajaran"
+    label: "Halaman: Pkks 06 Supervisi Pembelajaran"
+    type: file
+    path: "pkks-06-supervisi-pembelajaran.html"
+    format: code
+  - name: "page-pkks-dokumen-01-01"
+    label: "Halaman: Pkks Dokumen 01 01"
+    type: file
+    path: "pkks-dokumen-01-01.html"
+    format: code
+  - name: "page-pkks-dokumen-01-02"
+    label: "Halaman: Pkks Dokumen 01 02"
+    type: file
+    path: "pkks-dokumen-01-02.html"
+    format: code
+  - name: "page-pkks-dokumen-01-03"
+    label: "Halaman: Pkks Dokumen 01 03"
+    type: file
+    path: "pkks-dokumen-01-03.html"
+    format: code
+  - name: "page-pkks-dokumen-01-04"
+    label: "Halaman: Pkks Dokumen 01 04"
+    type: file
+    path: "pkks-dokumen-01-04.html"
+    format: code
+  - name: "page-pkks-dokumen-01-05"
+    label: "Halaman: Pkks Dokumen 01 05"
+    type: file
+    path: "pkks-dokumen-01-05.html"
+    format: code
+  - name: "page-pkks-dokumen-01-06"
+    label: "Halaman: Pkks Dokumen 01 06"
+    type: file
+    path: "pkks-dokumen-01-06.html"
+    format: code
+  - name: "page-pkks-dokumen-01-07"
+    label: "Halaman: Pkks Dokumen 01 07"
+    type: file
+    path: "pkks-dokumen-01-07.html"
+    format: code
+  - name: "page-pkks-dokumen-01-08"
+    label: "Halaman: Pkks Dokumen 01 08"
+    type: file
+    path: "pkks-dokumen-01-08.html"
+    format: code
+  - name: "page-pkks-dokumen-01-09"
+    label: "Halaman: Pkks Dokumen 01 09"
+    type: file
+    path: "pkks-dokumen-01-09.html"
+    format: code
+  - name: "page-pkks-dokumen-01-10"
+    label: "Halaman: Pkks Dokumen 01 10"
+    type: file
+    path: "pkks-dokumen-01-10.html"
+    format: code
+  - name: "page-pkks-dokumen-01-11"
+    label: "Halaman: Pkks Dokumen 01 11"
+    type: file
+    path: "pkks-dokumen-01-11.html"
+    format: code
+  - name: "page-pkks-dokumen-01-12"
+    label: "Halaman: Pkks Dokumen 01 12"
+    type: file
+    path: "pkks-dokumen-01-12.html"
+    format: code
+  - name: "page-pkks-dokumen-01-13"
+    label: "Halaman: Pkks Dokumen 01 13"
+    type: file
+    path: "pkks-dokumen-01-13.html"
+    format: code
+  - name: "page-pkks-dokumen-02-01"
+    label: "Halaman: Pkks Dokumen 02 01"
+    type: file
+    path: "pkks-dokumen-02-01.html"
+    format: code
+  - name: "page-pkks-dokumen-02-02"
+    label: "Halaman: Pkks Dokumen 02 02"
+    type: file
+    path: "pkks-dokumen-02-02.html"
+    format: code
+  - name: "page-pkks-dokumen-02-03"
+    label: "Halaman: Pkks Dokumen 02 03"
+    type: file
+    path: "pkks-dokumen-02-03.html"
+    format: code
+  - name: "page-pkks-dokumen-02-04"
+    label: "Halaman: Pkks Dokumen 02 04"
+    type: file
+    path: "pkks-dokumen-02-04.html"
+    format: code
+  - name: "page-pkks-dokumen-02-05"
+    label: "Halaman: Pkks Dokumen 02 05"
+    type: file
+    path: "pkks-dokumen-02-05.html"
+    format: code
+  - name: "page-pkks-dokumen-02-06"
+    label: "Halaman: Pkks Dokumen 02 06"
+    type: file
+    path: "pkks-dokumen-02-06.html"
+    format: code
+  - name: "page-pkks-dokumen-02-07"
+    label: "Halaman: Pkks Dokumen 02 07"
+    type: file
+    path: "pkks-dokumen-02-07.html"
+    format: code
+  - name: "page-pkks-dokumen-02-08"
+    label: "Halaman: Pkks Dokumen 02 08"
+    type: file
+    path: "pkks-dokumen-02-08.html"
+    format: code
+  - name: "page-pkks-dokumen-02-09"
+    label: "Halaman: Pkks Dokumen 02 09"
+    type: file
+    path: "pkks-dokumen-02-09.html"
+    format: code
+  - name: "page-pkks-dokumen-02-10"
+    label: "Halaman: Pkks Dokumen 02 10"
+    type: file
+    path: "pkks-dokumen-02-10.html"
+    format: code
+  - name: "page-pkks-dokumen-02-11"
+    label: "Halaman: Pkks Dokumen 02 11"
+    type: file
+    path: "pkks-dokumen-02-11.html"
+    format: code
+  - name: "page-pkks-dokumen-02-12"
+    label: "Halaman: Pkks Dokumen 02 12"
+    type: file
+    path: "pkks-dokumen-02-12.html"
+    format: code
+  - name: "page-pkks-dokumen-02-13"
+    label: "Halaman: Pkks Dokumen 02 13"
+    type: file
+    path: "pkks-dokumen-02-13.html"
+    format: code
+  - name: "page-pkks-dokumen-02-14"
+    label: "Halaman: Pkks Dokumen 02 14"
+    type: file
+    path: "pkks-dokumen-02-14.html"
+    format: code
+  - name: "page-pkks-dokumen-02-15"
+    label: "Halaman: Pkks Dokumen 02 15"
+    type: file
+    path: "pkks-dokumen-02-15.html"
+    format: code
+  - name: "page-pkks-dokumen-02-16"
+    label: "Halaman: Pkks Dokumen 02 16"
+    type: file
+    path: "pkks-dokumen-02-16.html"
+    format: code
+  - name: "page-pkks-dokumen-02-17"
+    label: "Halaman: Pkks Dokumen 02 17"
+    type: file
+    path: "pkks-dokumen-02-17.html"
+    format: code
+  - name: "page-pkks-dokumen-03-01"
+    label: "Halaman: Pkks Dokumen 03 01"
+    type: file
+    path: "pkks-dokumen-03-01.html"
+    format: code
+  - name: "page-pkks-dokumen-03-02"
+    label: "Halaman: Pkks Dokumen 03 02"
+    type: file
+    path: "pkks-dokumen-03-02.html"
+    format: code
+  - name: "page-pkks-dokumen-03-03"
+    label: "Halaman: Pkks Dokumen 03 03"
+    type: file
+    path: "pkks-dokumen-03-03.html"
+    format: code
+  - name: "page-pkks-dokumen-03-04"
+    label: "Halaman: Pkks Dokumen 03 04"
+    type: file
+    path: "pkks-dokumen-03-04.html"
+    format: code
+  - name: "page-pkks-dokumen-03-05"
+    label: "Halaman: Pkks Dokumen 03 05"
+    type: file
+    path: "pkks-dokumen-03-05.html"
+    format: code
+  - name: "page-pkks-dokumen-03-06"
+    label: "Halaman: Pkks Dokumen 03 06"
+    type: file
+    path: "pkks-dokumen-03-06.html"
+    format: code
+  - name: "page-pkks-dokumen-03-07"
+    label: "Halaman: Pkks Dokumen 03 07"
+    type: file
+    path: "pkks-dokumen-03-07.html"
+    format: code
+  - name: "page-pkks-dokumen-03-08"
+    label: "Halaman: Pkks Dokumen 03 08"
+    type: file
+    path: "pkks-dokumen-03-08.html"
+    format: code
+  - name: "page-pkks-dokumen-03-09"
+    label: "Halaman: Pkks Dokumen 03 09"
+    type: file
+    path: "pkks-dokumen-03-09.html"
+    format: code
+  - name: "page-pkks-dokumen-03-10"
+    label: "Halaman: Pkks Dokumen 03 10"
+    type: file
+    path: "pkks-dokumen-03-10.html"
+    format: code
+  - name: "page-pkks-dokumen-03-11"
+    label: "Halaman: Pkks Dokumen 03 11"
+    type: file
+    path: "pkks-dokumen-03-11.html"
+    format: code
+  - name: "page-pkks-dokumen-03-12"
+    label: "Halaman: Pkks Dokumen 03 12"
+    type: file
+    path: "pkks-dokumen-03-12.html"
+    format: code
+  - name: "page-pkks-dokumen-03-13"
+    label: "Halaman: Pkks Dokumen 03 13"
+    type: file
+    path: "pkks-dokumen-03-13.html"
+    format: code
+  - name: "page-pkks-dokumen-04-01"
+    label: "Halaman: Pkks Dokumen 04 01"
+    type: file
+    path: "pkks-dokumen-04-01.html"
+    format: code
+  - name: "page-pkks-dokumen-04-02"
+    label: "Halaman: Pkks Dokumen 04 02"
+    type: file
+    path: "pkks-dokumen-04-02.html"
+    format: code
+  - name: "page-pkks-dokumen-04-03"
+    label: "Halaman: Pkks Dokumen 04 03"
+    type: file
+    path: "pkks-dokumen-04-03.html"
+    format: code
+  - name: "page-pkks-dokumen-04-04"
+    label: "Halaman: Pkks Dokumen 04 04"
+    type: file
+    path: "pkks-dokumen-04-04.html"
+    format: code
+  - name: "page-pkks-dokumen-04-05"
+    label: "Halaman: Pkks Dokumen 04 05"
+    type: file
+    path: "pkks-dokumen-04-05.html"
+    format: code
+  - name: "page-pkks-dokumen-04-06"
+    label: "Halaman: Pkks Dokumen 04 06"
+    type: file
+    path: "pkks-dokumen-04-06.html"
+    format: code
+  - name: "page-pkks-dokumen-04-07"
+    label: "Halaman: Pkks Dokumen 04 07"
+    type: file
+    path: "pkks-dokumen-04-07.html"
+    format: code
+  - name: "page-pkks-dokumen-04-08"
+    label: "Halaman: Pkks Dokumen 04 08"
+    type: file
+    path: "pkks-dokumen-04-08.html"
+    format: code
+  - name: "page-pkks-dokumen-04-09"
+    label: "Halaman: Pkks Dokumen 04 09"
+    type: file
+    path: "pkks-dokumen-04-09.html"
+    format: code
+  - name: "page-pkks-dokumen-04-10"
+    label: "Halaman: Pkks Dokumen 04 10"
+    type: file
+    path: "pkks-dokumen-04-10.html"
+    format: code
+  - name: "page-pkks-dokumen-04-11"
+    label: "Halaman: Pkks Dokumen 04 11"
+    type: file
+    path: "pkks-dokumen-04-11.html"
+    format: code
+  - name: "page-pkks-dokumen-04-12"
+    label: "Halaman: Pkks Dokumen 04 12"
+    type: file
+    path: "pkks-dokumen-04-12.html"
+    format: code
+  - name: "page-pkks-dokumen-04-13"
+    label: "Halaman: Pkks Dokumen 04 13"
+    type: file
+    path: "pkks-dokumen-04-13.html"
+    format: code
+  - name: "page-pkks-dokumen-04-14"
+    label: "Halaman: Pkks Dokumen 04 14"
+    type: file
+    path: "pkks-dokumen-04-14.html"
+    format: code
+  - name: "page-pkks-dokumen-04-15"
+    label: "Halaman: Pkks Dokumen 04 15"
+    type: file
+    path: "pkks-dokumen-04-15.html"
+    format: code
+  - name: "page-pkks-dokumen-04-16"
+    label: "Halaman: Pkks Dokumen 04 16"
+    type: file
+    path: "pkks-dokumen-04-16.html"
+    format: code
+  - name: "page-pkks-dokumen-05-01"
+    label: "Halaman: Pkks Dokumen 05 01"
+    type: file
+    path: "pkks-dokumen-05-01.html"
+    format: code
+  - name: "page-pkks-dokumen-06-01"
+    label: "Halaman: Pkks Dokumen 06 01"
+    type: file
+    path: "pkks-dokumen-06-01.html"
+    format: code
+  - name: "page-pkks-dokumen-06-02"
+    label: "Halaman: Pkks Dokumen 06 02"
+    type: file
+    path: "pkks-dokumen-06-02.html"
+    format: code
+  - name: "page-pkks-dokumen-06-03"
+    label: "Halaman: Pkks Dokumen 06 03"
+    type: file
+    path: "pkks-dokumen-06-03.html"
+    format: code
+  - name: "page-pkks"
+    label: "Halaman: Pkks"
+    type: file
+    path: "pkks.html"
+    format: code
+  - name: "page-prestasi"
+    label: "Halaman: Prestasi"
+    type: file
+    path: "prestasi.html"
+    format: code
+  - name: "page-profil"
+    label: "Halaman: Profil"
+    type: file
+    path: "profil.html"
+    format: code
+  - name: "page-program-bis-kota"
+    label: "Halaman: Program Bis Kota"
+    type: file
+    path: "program-bis-kota.html"
+    format: code
+  - name: "page-program-gujarat"
+    label: "Halaman: Program Gujarat"
+    type: file
+    path: "program-gujarat.html"
+    format: code
+  - name: "page-program-kaca-bening-mari-dong"
+    label: "Halaman: Program Kaca Bening Mari Dong"
+    type: file
+    path: "program-kaca-bening-mari-dong.html"
+    format: code
+  - name: "page-program-kembang-krambil"
+    label: "Halaman: Program Kembang Krambil"
+    type: file
+    path: "program-kembang-krambil.html"
+    format: code
+  - name: "page-program-pusaka-pjok"
+    label: "Halaman: Program Pusaka Pjok"
+    type: file
+    path: "program-pusaka-pjok.html"
+    format: code
+  - name: "page-program-si-paham"
+    label: "Halaman: Program Si Paham"
+    type: file
+    path: "program-si-paham.html"
+    format: code
+  - name: "page-program"
+    label: "Halaman: Program"
+    type: file
+    path: "program.html"
+    format: code
