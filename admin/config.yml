@@ -1,1 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main
 
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "Halaman Website"
+    files:
+      - file: "index.html"
+        label: "Halaman Utama"
+        name: "index"
+        fields:
+          - {label: "Judul Utama", name: "title", widget: "string"}
+          - {label: "Isi Konten", name: "body", widget: "markdown"}
