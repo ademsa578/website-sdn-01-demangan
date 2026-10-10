@@ -1,20 +1,25 @@
 <!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Catatan Prestasi Sekolah — SDN 01 Demangan</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"><link href="style.css" rel="stylesheet"><style>
 .pkksWrap{max-width:1120px;margin:auto;padding:52px 22px 76px}.crumb{font-size:14px;color:#64748b;margin-bottom:22px}.crumb a{color:#087f68;text-decoration:none}.pageEyebrow{color:#087f68;font-weight:800;letter-spacing:.12em;font-size:12px;text-transform:uppercase}.pageTitle{font:800 clamp(28px,4vw,44px) Manrope,sans-serif;line-height:1.15;margin:12px 0}.pageLead{color:#64748b;max-width:760px;line-height:1.7;margin-bottom:30px}.docPanel{background:white;border:1px solid #e2e8f0;border-radius:20px;padding:clamp(22px,5vw,42px);max-width:900px;margin:0 auto}.docIcon{font-size:34px}.docPanel h2{font:800 clamp(24px,4vw,34px) Manrope,sans-serif;line-height:1.25;margin:15px 0}.docPanel p{color:#64748b;line-height:1.75}.actionRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}.actionLink{display:inline-block;padding:12px 17px;border-radius:10px;text-decoration:none;font-weight:700;background:#087f68;color:white}.actionLink.secondary{background:#eef2f7;color:#334155}
 
-/* Style Kartu Galeri Prestasi */
-.prestasiSection{margin-top:32px;padding-top:24px;border-top:1px solid #e2e8f0}.prestasiSection h3{font:800 20px Manrope,sans-serif;color:#172033;margin-bottom:6px}.prestasiSection p{font-size:14px;color:#64748b;margin-bottom:20px}.prestasiGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}.prestasiCard{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px #0f172a05;display:flex;flex-direction:column}.prestasiCard img{width:100%;height:200px;object-fit:cover;display:block;background:#e2e8f0}.prestasiBody{padding:16px;display:flex;flex-direction:column;flex-grow:1}.raihanBadge{display:inline-block;padding:4px 10px;background:#e8f7f2;color:#087f68;font-weight:800;font-size:12px;border-radius:6px;margin-bottom:8px;width:fit-content}.prestasiTitle{font-weight:800;font-size:16px;color:#172033;margin-bottom:8px;line-height:1.35}.prestasiDesc{font-size:13px;color:#64748b;line-height:1.6}@media(max-width:600px){.pkksWrap{padding-top:34px}}
+/* Style Kartu Galeri Prestasi & Interaksi Zoom */
+.prestasiSection{margin-top:32px;padding-top:24px;border-top:1px solid #e2e8f0}.prestasiSection h3{font:800 20px Manrope,sans-serif;color:#172033;margin-bottom:6px}.prestasiSection p{font-size:14px;color:#64748b;margin-bottom:20px}.prestasiGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}.prestasiCard{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px #0f172a05;display:flex;flex-direction:column}.imgWrapper{position:relative;overflow:hidden;cursor:pointer}.prestasiCard img{width:100%;height:220px;object-fit:cover;object-position:top center;display:block;background:#e2e8f0;transition:transform .3s ease}.imgWrapper:hover img{transform:scale(1.06)}.imgWrapper::after{content:'🔍 Klik untuk Zoom';position:absolute;bottom:10px;right:10px;background:rgba(15,23,42,0.75);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;opacity:0;transition:opacity .2s}.imgWrapper:hover::after{opacity:1}.prestasiBody{padding:16px;display:flex;flex-direction:column;flex-grow:1}.raihanBadge{display:inline-block;padding:4px 10px;background:#e8f7f2;color:#087f68;font-weight:800;font-size:12px;border-radius:6px;margin-bottom:8px;width:fit-content}.prestasiTitle{font-weight:800;font-size:16px;color:#172033;margin-bottom:8px;line-height:1.35}.prestasiDesc{font-size:13px;color:#64748b;line-height:1.6}
+
+/* Modal Popup Lightbox Zoom Gambar */
+.lightboxModal{display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;background-color:rgba(15,23,42,0.88);backdrop-filter:blur(5px);justify-content:center;align-items:center;padding:20px}.lightboxContent{max-width:90%;max-height:85vh;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,0.5);object-fit:contain}.lightboxClose{position:absolute;top:20px;right:30px;color:#fff;font-size:36px;font-weight:700;cursor:pointer;line-height:1}@media(max-width:600px){.pkksWrap{padding-top:34px}}
 </style></head><body><div class="announcement"><span>✦ SDN 01 DEMANGAN</span><span>Smart School • Karakter • Prestasi</span></div><header><div class="nav"><a class="brand" href="index.html"><span class="brandMark"><img alt="Logo SDN 01 Demangan" src="assets/logo.jpg"></span><div><b>SDN 01 DEMANGAN</b><small>SMART SCHOOL</small></div></a><button id="menu">☰</button><nav class="siteNav"><a data-page="home" href="index.html">Home</a><a data-page="profil" href="profil.html">Profil</a><a data-page="program" href="program.html">Program</a><a data-page="ekstrakurikuler" href="ekstrakurikuler.html">Ekstrakurikuler</a><a data-page="berita" href="berita.html">Berita</a><a data-page="prestasi" href="prestasi.html">Prestasi</a><a class="active" data-page="pkks" href="pkks.html">PKKS</a><a data-page="galeri" href="galeri.html">Galeri</a></nav><a class="navbtn" href="kontak.html">Kontak ↗</a></div></header><main><section class="pkksWrap"><div class="crumb"><a href="index.html">Beranda</a> / <a href="pkks.html">PKKS</a> / <a href="pkks-01-kepribadian-dan-sosial.html">Kepribadian dan Sosial</a> / 01.3</div><div class="pageEyebrow">PKKS · Komponen 01</div><article class="docPanel"><div class="docIcon">🏆</div><div class="pageEyebrow">Dokumen 01.3</div><h2>Catatan Prestasi Sekolah</h2><p>Halaman rekam jejak <b>Catatan Prestasi Sekolah</b> pada komponen PKKS <b>Kepribadian dan Sosial</b> SDN 01 Demangan yang dikelompokkan berdasarkan Prestasi Siswa serta Prestasi Guru, Kepala Sekolah, dan Institusi.</p>
 
 <!-- BAGIAN A: KATEGORI PRESTASI SISWA -->
 <div class="prestasiSection">
   <h3>🏆 A. Kategori Prestasi Siswa</h3>
-  <p>Dokumentasi foto dan keterangan capaian kejuaraan yang berhasil diraih oleh siswa-siswi SDN 01 Demangan.</p>
+  <p>Dokumentasi foto dan keterangan capaian kejuaraan yang berhasil diraih oleh siswa-siswi SDN 01 Demangan. Klik gambar untuk melihat ukuran penuh.</p>
 
   <div class="prestasiGrid">
 
     <!-- Siswa 1 -->
     <div class="prestasiCard">
-      <img src="assets/prestasi/Juara-1-Lowper-MHCUP.jpeg" alt="Juara 1 Futsal MH Cup">
+      <div class="imgWrapper" onclick="openZoom('assets/prestasi/Juara-1-Lowper-MHCUP.jpeg')">
+        <img src="assets/prestasi/Juara-1-Lowper-MHCUP.jpeg" alt="Juara 1 Futsal MH Cup">
+      </div>
       <div class="prestasiBody">
         <span class="raihanBadge">🥇 Juara 1</span>
         <div class="prestasiTitle">Juara 1 Futsal MH Cup</div>
@@ -24,27 +29,33 @@
 
     <!-- Siswa 2 -->
     <div class="prestasiCard">
-      <img src="assets/prestasi/Juara-1-Pentaque.jpeg" alt="Juara 1 Pentakwi">
+      <div class="imgWrapper" onclick="openZoom('assets/prestasi/Juara-1-Pentaque.jpeg')">
+        <img src="assets/prestasi/Juara-1-Pentaque.jpeg" alt="Juara 1 Pentanque" style="object-position: center 15%;">
+      </div>
       <div class="prestasiBody">
         <span class="raihanBadge">🥇 Juara 1</span>
-        <div class="prestasiTitle">Juara 1 Pentakwi</div>
-        <div class="prestasiDesc">Keberhasilan siswa-siswi SDN 01 Demangan dalam menorehkan prestasi sebagai Juara 1 pada cabang olahraga Pentakwi dalam acara Kejurkot tahun 2024.</div>
+        <div class="prestasiTitle">Juara 1 Pentanque</div>
+        <div class="prestasiDesc">Keberhasilan siswa-siswi SDN 01 Demangan dalam menorehkan prestasi sebagai Juara 1 pada cabang olahraga Pentanque dalam acara Kejurkot tahun 2024.</div>
       </div>
     </div>
 
     <!-- Siswa 3 -->
     <div class="prestasiCard">
-      <img src="assets/prestasi/Juara-3-Pentaque-IndrakilaCup.jpeg" alt="Juara 3 Pentakwi">
+      <div class="imgWrapper" onclick="openZoom('assets/prestasi/Juara-3-Pentaque-IndrakilaCup.jpeg')">
+        <img src="assets/prestasi/Juara-3-Pentaque-IndrakilaCup.jpeg" alt="Juara 3 Pentanque">
+      </div>
       <div class="prestasiBody">
         <span class="raihanBadge">🥉 Juara 3</span>
-        <div class="prestasiTitle">Juara 3 Pentakwi</div>
-        <div class="prestasiDesc">Raihan Juara 3 oleh kontingen siswa SDN 01 Demangan dalam ajang kejuaraan Kejurkot Pentakwi di SDN Indrakila pada tahun 2025.</div>
+        <div class="prestasiTitle">Juara 3 Pentanque</div>
+        <div class="prestasiDesc">Raihan Juara 3 oleh kontingen siswa SDN 01 Demangan dalam ajang kejuaraan Kejurkot Pentanque di SDN Indrakila pada tahun 2025.</div>
       </div>
     </div>
 
     <!-- Siswa 4 -->
     <div class="prestasiCard">
-      <img src="assets/prestasi/Juara-3-Sepak-Takraw.png" alt="Juara 3 Sepak Takraw Walikota Madiun Cup">
+      <div class="imgWrapper" onclick="openZoom('assets/prestasi/Juara-3-Sepak-Takraw.png')">
+        <img src="assets/prestasi/Juara-3-Sepak-Takraw.png" alt="Juara 3 Sepak Takraw Walikota Madiun Cup">
+      </div>
       <div class="prestasiBody">
         <span class="raihanBadge">🥉 Juara 3</span>
         <div class="prestasiTitle">Juara 3 Sepak Takraw Walikota Madiun Cup</div>
@@ -54,7 +65,9 @@
 
     <!-- Siswa 5 -->
     <div class="prestasiCard">
-      <img src="assets/prestasi/Juara-Harapan-I-PMR.jpg" alt="Juara Harapan 1 PMR">
+      <div class="imgWrapper" onclick="openZoom('assets/prestasi/Juara-Harapan-I-PMR.jpg')">
+        <img src="assets/prestasi/Juara-Harapan-I-PMR.jpg" alt="Juara Harapan 1 PMR">
+      </div>
       <div class="prestasiBody">
         <span class="raihanBadge">🎖️ Juara Harapan 1</span>
         <div class="prestasiTitle">Juara Harapan 1 PMR</div>
@@ -74,7 +87,9 @@
 
     <!-- Guru 1 -->
     <div class="prestasiCard">
-      <img src="assets/prestasi/Juara-Harapan-I-LBM.jpeg" alt="Juara Harapan 1 LBM">
+      <div class="imgWrapper" onclick="openZoom('assets/prestasi/Juara-Harapan-I-LBM.jpeg')">
+        <img src="assets/prestasi/Juara-Harapan-I-LBM.jpeg" alt="Juara Harapan 1 LBM">
+      </div>
       <div class="prestasiBody">
         <span class="raihanBadge">🎖️ Juara Harapan 1</span>
         <div class="prestasiTitle">Juara Harapan 1 LBM</div>
@@ -84,7 +99,9 @@
 
     <!-- Guru 2 -->
     <div class="prestasiCard">
-      <img src="assets/prestasi/Juara-I-KIAT-2026.jpeg" alt="Juara 1 Anugerah Kiat">
+      <div class="imgWrapper" onclick="openZoom('assets/prestasi/Juara-I-KIAT-2026.jpeg')">
+        <img src="assets/prestasi/Juara-I-KIAT-2026.jpeg" alt="Juara 1 Anugerah Kiat">
+      </div>
       <div class="prestasiBody">
         <span class="raihanBadge">🥇 Juara 1</span>
         <div class="prestasiTitle">Juara 1 Anugerah Kiat</div>
@@ -94,7 +111,9 @@
 
     <!-- Guru 3 -->
     <div class="prestasiCard">
-      <img src="assets/prestasi/Penghargaan-Adiwiyata-Nasional.jpeg" alt="Penghargaan Sekolah Adiwiyata Nasional">
+      <div class="imgWrapper" onclick="openZoom('assets/prestasi/Penghargaan-Adiwiyata-Nasional.jpeg')">
+        <img src="assets/prestasi/Penghargaan-Adiwiyata-Nasional.jpeg" alt="Penghargaan Sekolah Adiwiyata Nasional">
+      </div>
       <div class="prestasiBody">
         <span class="raihanBadge">🌿 Adiwiyata Nasional</span>
         <div class="prestasiTitle">Penghargaan Sekolah Adiwiyata Nasional</div>
@@ -105,4 +124,20 @@
   </div>
 </div>
 
-<div class="actionRow"><a class="actionLink" href="pkks-01-kepribadian-dan-sosial.html">← Kembali ke daftar Kepribadian dan Sosial</a><a class="actionLink secondary" href="pkks.html">Semua komponen PKKS</a></div></article></section></main><footer><div class="wrap"><b>SDN 01 DEMANGAN</b><span>© 2026 · SDN 01 Demangan V31</span></div></footer><script src="script.js"></script></body></html>
+<div class="actionRow"><a class="actionLink" href="pkks-01-kepribadian-dan-sosial.html">← Kembali ke daftar Kepribadian dan Sosial</a><a class="actionLink secondary" href="pkks.html">Semua komponen PKKS</a></div></article></section></main>
+
+<!-- Modal Zoom Pop-up -->
+<div id="lightbox" class="lightboxModal" onclick="closeZoom()"><span class="lightboxClose" onclick="closeZoom()">&times;</span><img id="lightboxImg" class="lightboxContent" src="" alt="Zoom Foto"></div>
+
+<footer><div class="wrap"><b>SDN 01 DEMANGAN</b><span>© 2026 · SDN 01 Demangan V31</span></div></footer>
+
+<script>
+function openZoom(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').style.display = 'flex';
+}
+function closeZoom() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+</script>
+<script src="script.js"></script></body></html>
