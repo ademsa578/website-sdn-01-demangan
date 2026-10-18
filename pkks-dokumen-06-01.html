@@ -4,7 +4,7 @@
 /* Dashboard Statistik Singkat */
 .statsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:25px 0 30px}.statCard{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px;text-align:center}.statNum{font:800 28px Manrope,sans-serif;color:#087f68;margin-bottom:4px}.statLabel{font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 
-/* Style Tab Pilihan Guru 4 Kolom Simetris */
+/* Style Tab Pilihan Guru 4 Kolom Simetris (4 atas, 4 bawah) */
 .pdfTabContainer{display:grid;grid-template-columns:repeat(4,minmax(200px,1fr));gap:12px;margin:28px 0 20px}
 .pdfTabBtn{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;transition:.2s;text-align:left;font-family:'DM Sans',sans-serif;width:100%}
 .pdfTabBtn:hover{border-color:#79c8b5;background:#f0f9f6}
@@ -38,44 +38,10 @@
 
 <p style="font-weight:700;color:#172033;margin-bottom:12px;">Pilih Nama Guru untuk Pratinjau Dokumen Evaluasi &amp; Refleksi:</p>
 
-<!-- Tab Pilihan Dokumen Per Guru (4 Kolom Rapi) -->
+<!-- Tab Pilihan Dokumen Per Guru (Urut Kelas 1 s.d. PJOK) -->
 <div class="pdfTabContainer">
-  <button class="pdfTabBtn active" onclick="switchPdf('assets/supervisi/Erna_Agustina_Guru_Kelas_5.pdf', 'Dokumen Refleksi &amp; Evaluasi - Erna Agustina (Guru Kelas 5)', this)">
-    <span class="pdfTabIcon">👩‍🏫</span>
-    <div>
-      <span class="pdfTabTitle">Erna Agustina</span>
-      <span class="pdfTabSub">Guru Kelas 5</span>
-    </div>
-  </button>
-  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Mar_atus_Solichahi_Guru_PAI.pdf', 'Dokumen Refleksi &amp; Evaluasi - Mar`atus Solichahi (Guru PAI)', this)">
-    <span class="pdfTabIcon">👩‍🏫</span>
-    <div>
-      <span class="pdfTabTitle">Mar'atus Solichahi</span>
-      <span class="pdfTabSub">Guru PAI</span>
-    </div>
-  </button>
-  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Misini_Guru_Kelas_3.pdf', 'Dokumen Refleksi &amp; Evaluasi - Misini (Guru Kelas 3)', this)">
-    <span class="pdfTabIcon">👩‍🏫</span>
-    <div>
-      <span class="pdfTabTitle">Misini</span>
-      <span class="pdfTabSub">Guru Kelas 3</span>
-    </div>
-  </button>
-  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Mukhlis_Syahroni_Guru_Kelas_6.pdf', 'Dokumen Refleksi &amp; Evaluasi - Mukhlis Syahroni (Guru Kelas 6)', this)">
-    <span class="pdfTabIcon">👨‍🏫</span>
-    <div>
-      <span class="pdfTabTitle">Mukhlis Syahroni</span>
-      <span class="pdfTabSub">Guru Kelas 6</span>
-    </div>
-  </button>
-  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Rafiq_Nurhanaping_Guru_Kelas_4.pdf', 'Dokumen Refleksi &amp; Evaluasi - Rafiq Nurhanaping (Guru Kelas 4)', this)">
-    <span class="pdfTabIcon">👨‍🏫</span>
-    <div>
-      <span class="pdfTabTitle">Rafiq Nurhanaping</span>
-      <span class="pdfTabSub">Guru Kelas 4</span>
-    </div>
-  </button>
-  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Sri_Lestari_Guru_Kelas_1.pdf', 'Dokumen Refleksi &amp; Evaluasi - Sri Lestari (Guru Kelas 1)', this)">
+  <!-- Baris Atas -->
+  <button class="pdfTabBtn active" onclick="switchPdf('assets/supervisi/Sri_Lestari_Guru_Kelas_1.pdf', 'Dokumen Refleksi &amp; Evaluasi - Sri Lestari (Guru Kelas 1)', this)">
     <span class="pdfTabIcon">👩‍🏫</span>
     <div>
       <span class="pdfTabTitle">Sri Lestari</span>
@@ -87,6 +53,43 @@
     <div>
       <span class="pdfTabTitle">Sutanti Juliani</span>
       <span class="pdfTabSub">Guru Kelas 2</span>
+    </div>
+  </button>
+  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Misini_Guru_Kelas_3.pdf', 'Dokumen Refleksi &amp; Evaluasi - Misini (Guru Kelas 3)', this)">
+    <span class="pdfTabIcon">👩‍🏫</span>
+    <div>
+      <span class="pdfTabTitle">Misini</span>
+      <span class="pdfTabSub">Guru Kelas 3</span>
+    </div>
+  </button>
+  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Rafiq_Nurhanaping_Guru_Kelas_4.pdf', 'Dokumen Refleksi &amp; Evaluasi - Rafiq Nurhanaping (Guru Kelas 4)', this)">
+    <span class="pdfTabIcon">👨‍🏫</span>
+    <div>
+      <span class="pdfTabTitle">Rafiq Nurhanaping</span>
+      <span class="pdfTabSub">Guru Kelas 4</span>
+    </div>
+  </button>
+
+  <!-- Baris Bawah -->
+  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Erna_Agustina_Guru_Kelas_5.pdf', 'Dokumen Refleksi &amp; Evaluasi - Erna Agustina (Guru Kelas 5)', this)">
+    <span class="pdfTabIcon">👩‍🏫</span>
+    <div>
+      <span class="pdfTabTitle">Erna Agustina</span>
+      <span class="pdfTabSub">Guru Kelas 5</span>
+    </div>
+  </button>
+  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Mukhlis_Syahroni_Guru_Kelas_6.pdf', 'Dokumen Refleksi &amp; Evaluasi - Mukhlis Syahroni (Guru Kelas 6)', this)">
+    <span class="pdfTabIcon">👨‍🏫</span>
+    <div>
+      <span class="pdfTabTitle">Mukhlis Syahroni</span>
+      <span class="pdfTabSub">Guru Kelas 6</span>
+    </div>
+  </button>
+  <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Mar_atus_Solichahi_Guru_PAI.pdf', 'Dokumen Refleksi &amp; Evaluasi - Mar`atus Solichahi (Guru PAI)', this)">
+    <span class="pdfTabIcon">👩‍🏫</span>
+    <div>
+      <span class="pdfTabTitle">Mar'atus Solichahi</span>
+      <span class="pdfTabSub">Guru PAI</span>
     </div>
   </button>
   <button class="pdfTabBtn" onclick="switchPdf('assets/supervisi/Resbian_PJOK.pdf', 'Dokumen Refleksi &amp; Evaluasi - Resbian (Guru PJOK)', this)">
@@ -101,11 +104,11 @@
 <!-- Layar Pratinjau Luas -->
 <div class="pdfFullCard">
   <div class="pdfHeaderRow">
-    <div class="pdfHeaderTitle"><span id="activeDocIcon">📄</span> <span id="activeDocTitle">Dokumen Refleksi &amp; Evaluasi - Erna Agustina (Guru Kelas 5)</span></div>
-    <a id="downloadPdfBtn" class="pdfDownloadBtn" href="assets/supervisi/Erna_Agustina_Guru_Kelas_5.pdf" target="_blank">Unduh File Original PDF ↗</a>
+    <div class="pdfHeaderTitle"><span id="activeDocIcon">📄</span> <span id="activeDocTitle">Dokumen Refleksi &amp; Evaluasi - Sri Lestari (Guru Kelas 1)</span></div>
+    <a id="downloadPdfBtn" class="pdfDownloadBtn" href="assets/supervisi/Sri_Lestari_Guru_Kelas_1.pdf" target="_blank">Unduh File Original PDF ↗</a>
   </div>
   <div class="pdfFrameWrapperFull">
-    <iframe id="pdfFrame" src="assets/supervisi/Erna_Agustina_Guru_Kelas_5.pdf" title="Pratinjau Dokumen Evaluasi dan Refleksi Guru"></iframe>
+    <iframe id="pdfFrame" src="assets/supervisi/Sri_Lestari_Guru_Kelas_1.pdf" title="Pratinjau Dokumen Evaluasi dan Refleksi Guru"></iframe>
   </div>
 </div>
 
