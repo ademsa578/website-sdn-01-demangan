@@ -1,108 +1,103 @@
 <!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hasil Pelaksanaan Program Kurikulum (02.16) — SDN 01 Demangan</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"><link href="style.css" rel="stylesheet"><style>
 .pkksWrap{max-width:1200px;margin:auto;padding:32px 22px 60px}.crumb{font-size:14px;color:#64748b;margin-bottom:18px}.crumb a{color:#087f68;text-decoration:none}.pageEyebrow{color:#087f68;font-weight:800;letter-spacing:.12em;font-size:12px;text-transform:uppercase}.pageTitle{font:800 clamp(24px,3.5vw,36px) Manrope,sans-serif;line-height:1.2;margin:8px 0 8px}.pageLead{color:#64748b;margin-bottom:28px;line-height:1.6}
 
-/* Category Navigation Tabs / Cards */
-.categoryTabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:35px}
-.catTab{background:white;border:2px solid #e2e8f0;border-radius:14px;padding:16px;text-align:center;font-weight:700;color:#334155;cursor:pointer;transition:.2s;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:6px}
-.catTab:hover,.catTab.active{border-color:#087f68;background:#f0fdf4;color:#087f68;transform:translateY(-2px)}
-.catTab span{font-size:24px}
+/* Tab Navigation Buttons */
+.categoryTabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.catBtn{background:white;border:2px solid #cbd5e1;border-radius:12px;padding:12px 20px;font-weight:700;color:#334155;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:8px;font-size:14px}
+.catBtn:hover{border-color:#087f68;color:#087f68}
+.catBtn.active{background:#087f68;border-color:#087f68;color:white;box-shadow:0 4px 12px rgba(8,127,104,0.25)}
 
-/* Section Group */
-.sectionGroup{margin-bottom:40px;background:white;border:1px solid #e2e8f0;border-radius:18px;padding:24px;box-shadow:0 4px 15px rgba(0,0,0,0.02)}
-.sectionTitle{font:800 20px Manrope,sans-serif;color:#0f172a;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #f1f5f9;display:flex;align-items:center;gap:10px}
-
-/* Clean Gallery Grid (No text caption below) */
-.photoGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-.photoCard{background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px #0f172a08;cursor:pointer;transition:.2s;aspect-ratio:4/3;position:relative}
-.photoCard:hover{transform:translateY(-3px);border-color:#087f68;box-shadow:0 10px 20px #087f6815}
+/* Gallery Grid */
+.photoGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;min-height:300px}
+.photoCard{background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px;overflow:hidden;box-shadow:0 4px 12px #0f172a08;cursor:pointer;transition:.2s;aspect-ratio:4/3;position:relative}
+.photoCard:hover{transform:translateY(-4px);border-color:#087f68;box-shadow:0 12px 24px #087f6820}
 .photoThumb{width:100%;height:100%;object-fit:cover;transition:.3s}
 .photoCard:hover .photoThumb{transform:scale(1.05)}
 
-/* Lightbox Modal */
-.lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:.3s;padding:20px}
+/* Category Group Switcher (Default Hidden, Display Active Only) */
+.programGroup{display:none}
+.programGroup.active{display:block}
+
+/* Lightbox Modal (Clean View) */
+.lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.92);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:.3s;padding:20px}
 .lightbox.active{opacity:1;pointer-events:auto}
-.lightboxContent{max-width:90%;max-height:85vh;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,0.5);object-fit:contain;background:white}
-.lightboxClose{position:absolute;top:20px;right:30px;background:white;color:#0f172a;border:none;width:40px;height:40px;border-radius:50%;font-size:22px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);transition:.2s}
+.lightboxContent{max-width:92%;max-height:88vh;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,0.6);object-fit:contain;background:white}
+.lightboxClose{position:absolute;top:20px;right:30px;background:white;color:#0f172a;border:none;width:42px;height:42px;border-radius:50%;font-size:24px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition:.2s}
 .lightboxClose:hover{background:#087f68;color:white}
 
-.actionRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:35px}
+.actionRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:40px}
 .actionLink{display:inline-block;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:700;font-size:14px}
 .actionLink.primary{background:#087f68;color:white}
 .actionLink.secondary{background:#eef2f7;color:#334155}
 
-@media(max-width:768px){.pkksWrap{padding-top:24px}.categoryTabs{grid-template-columns:repeat(2,1fr)}}
-</style></head><body><div class="announcement"><span>✦ SDN 01 DEMANGAN</span><span>Smart School • Karakter • Prestasi</span></div><header><div class="nav"><a class="brand" href="index.html"><span class="brandMark"><img alt="Logo SDN 01 Demangan" src="assets/logo.jpg"></span><div><b>SDN 01 DEMANGAN</b><small>SMART SCHOOL</small></div></a><button id="menu">☰</button><nav class="siteNav"><a data-page="home" href="index.html">Home</a><a data-page="profil" href="profil.html">Profil</a><a data-page="program" href="program.html">Program</a><a data-page="ekstrakurikuler" href="ekstrakurikuler.html">Ekstrakurikuler</a><a data-page="berita" href="berita.html">Berita</a><a data-page="prestasi" href="prestasi.html">Prestasi</a><a class="active" data-page="pkks" href="pkks.html">PKKS</a><a data-page="galeri" href="galeri.html">Galeri</a></nav><a class="navbtn" href="kontak.html">Kontak ↗</a></div></header><main><section class="pkksWrap"><div class="crumb"><a href="index.html">Beranda</a> / <a href="pkks.html">PKKS</a> / Komponen 02 / 02.16</div><div class="pageEyebrow">PKKS · Komponen 02 (Kepemimpinan Pembelajaran)</div><h1 class="pageTitle">Hasil Pelaksanaan Program Kurikulum</h1><p class="pageLead">Dokumentasi kegiatan program unggulan sekolah. Klik pada salah satu kategori di bawah atau pilih foto untuk memperbesar tampilan saat presentasi.</p>
+@media(max-width:600px){.pkksWrap{padding-top:24px}.catBtn{width:100%;justify-content:center}}
+</style></head><body><div class="announcement"><span>✦ SDN 01 DEMANGAN</span><span>Smart School • Karakter • Prestasi</span></div><header><div class="nav"><a class="brand" href="index.html"><span class="brandMark"><img alt="Logo SDN 01 Demangan" src="assets/logo.jpg"></span><div><b>SDN 01 DEMANGAN</b><small>SMART SCHOOL</small></div></a><button id="menu">☰</button><nav class="siteNav"><a data-page="home" href="index.html">Home</a><a data-page="profil" href="profil.html">Profil</a><a data-page="program" href="program.html">Program</a><a data-page="ekstrakurikuler" href="ekstrakurikuler.html">Ekstrakurikuler</a><a data-page="berita" href="berita.html">Berita</a><a data-page="prestasi" href="prestasi.html">Prestasi</a><a class="active" data-page="pkks" href="pkks.html">PKKS</a><a data-page="galeri" href="galeri.html">Galeri</a></nav><a class="navbtn" href="kontak.html">Kontak ↗</a></div></header><main><section class="pkksWrap"><div class="crumb"><a href="index.html">Beranda</a> / <a href="pkks.html">PKKS</a> / Komponen 02 / 02.16</div><div class="pageEyebrow">PKKS · Komponen 02 (Kepemimpinan Pembelajaran)</div><h1 class="pageTitle">Hasil Pelaksanaan Program Kurikulum</h1><p class="pageLead">Pilih salah satu program di bawah ini untuk menampilkan dokumentasi fotonya secara khusus.</p>
 
-<!-- Navigasi 5 Icon / Kategori -->
+<!-- Tombol Navigasi Tab Program -->
 <div class="categoryTabs">
-  <a class="catTab" href="#Kembang_Krambil"><span>🌾</span> Kembang Krambil</a>
-  <a class="catTab" href="#Bis_Kota"><span>🚌</span> Bis Kota</a>
-  <a class="catTab" href="#Kaca_Bening_Mari_Dong"><span>📖</span> Kaca Bening Mari Dong</a>
-  <a class="catTab" href="#Adiwiyata"><span>🌱</span> Adiwiyata</a>
-  <a class="catTab" href="#Jumat_Bersih"><span>✨</span> Jumat Bersih</a>
+  <button class="catBtn active" onclick="switchProgram('Kembang_Krambil', this)">🌾 Kembang Krambil</button>
+  <button class="catBtn" onclick="switchProgram('Bis_Kota', this)">🚌 Bis Kota</button>
+  <button class="catBtn" onclick="switchProgram('Kaca_Bening_Mari_Dong', this)">📖 Kaca Bening Mari Dong</button>
+  <button class="catBtn" onclick="switchProgram('Adiwiyata', this)">🌱 Adiwiyata</button>
+  <button class="catBtn" onclick="switchProgram('Jumat_Bersih', this)">✨ Jumat Bersih</button>
 </div>
 
-<!-- 1. Kembang_Krambil -->
-<div id="Kembang_Krambil" class="sectionGroup">
-  <div class="sectionTitle">🌾 Kembang Krambil</div>
+<!-- 1. Kembang Krambil (Hanya tampil saat tombol Kembang Krambil aktif) -->
+<div id="Kembang_Krambil" class="programGroup active">
   <div class="photoGrid">
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_01.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_01.jpeg" alt="Kembang Krambil"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_02.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_02.jpeg" alt="Kembang Krambil"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_03.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_03.jpeg" alt="Kembang Krambil"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_04.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_04.jpeg" alt="Kembang Krambil"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_05.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_05.jpeg" alt="Kembang Krambil"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_01.jpg')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_01.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_02.jpg')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_02.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_03.png')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_03.png" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_04.png')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_04.png" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kembang_Krambil/foto_05.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kembang_Krambil/foto_05.jpeg" alt="Dokumentasi"></div>
   </div>
 </div>
 
-<!-- 2. Bis_Kota -->
-<div id="Bis_Kota" class="sectionGroup">
-  <div class="sectionTitle">🚌 Bis Kota</div>
+<!-- 2. Bis Kota -->
+<div id="Bis_Kota" class="programGroup">
   <div class="photoGrid">
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_01.jpeg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_01.jpeg" alt="Bis Kota"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_02.jpeg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_02.jpeg" alt="Bis Kota"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_03.jpeg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_03.jpeg" alt="Bis Kota"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_04.jpeg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_04.jpeg" alt="Bis Kota"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_05.jpeg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_05.jpeg" alt="Bis Kota"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_01.jpg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_01.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_02.jpg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_02.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_03.jpg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_03.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_04.jpg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_04.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Bis_Kota/foto_05.jpg')"><img class="photoThumb" src="assets/kurikulum/Bis_Kota/foto_05.jpg" alt="Dokumentasi"></div>
   </div>
 </div>
 
-<!-- 3. Kaca_Bening_Mari_Dong -->
-<div id="Kaca_Bening_Mari_Dong" class="sectionGroup">
-  <div class="sectionTitle">📖 Kaca Bening Mari Dong</div>
+<!-- 3. Kaca Bening Mari Dong -->
+<div id="Kaca_Bening_Mari_Dong" class="programGroup">
   <div class="photoGrid">
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_01.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_01.jpeg" alt="Kaca Bening Mari Dong"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_02.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_02.jpeg" alt="Kaca Bening Mari Dong"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_03.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_03.jpeg" alt="Kaca Bening Mari Dong"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_04.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_04.jpeg" alt="Kaca Bening Mari Dong"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_05.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_05.jpeg" alt="Kaca Bening Mari Dong"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_01.jpg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_01.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_02.jpeg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_02.jpeg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_03.jpg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_03.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_04.jpg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_04.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Kaca_Bening_Mari_Dong/foto_05.jpg')"><img class="photoThumb" src="assets/kurikulum/Kaca_Bening_Mari_Dong/foto_05.jpg" alt="Dokumentasi"></div>
   </div>
 </div>
 
 <!-- 4. Adiwiyata -->
-<div id="Adiwiyata" class="sectionGroup">
-  <div class="sectionTitle">🌱 Adiwiyata</div>
+<div id="Adiwiyata" class="programGroup">
   <div class="photoGrid">
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_01.jpeg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_01.jpeg" alt="Adiwiyata"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_02.jpeg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_02.jpeg" alt="Adiwiyata"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_03.jpeg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_03.jpeg" alt="Adiwiyata"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_04.jpeg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_04.jpeg" alt="Adiwiyata"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_05.jpeg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_05.jpeg" alt="Adiwiyata"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_01.jpeg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_01.jpeg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_02.jpeg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_02.jpeg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_03.jpg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_03.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_04.jpeg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_04.jpeg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Adiwiyata/foto_05.jpeg')"><img class="photoThumb" src="assets/kurikulum/Adiwiyata/foto_05.jpeg" alt="Dokumentasi"></div>
   </div>
 </div>
 
-<!-- 5. Jumat_Bersih -->
-<div id="Jumat_Bersih" class="sectionGroup">
-  <div class="sectionTitle">✨ Jumat Bersih</div>
+<!-- 5. Jumat Bersih -->
+<div id="Jumat_Bersih" class="programGroup">
   <div class="photoGrid">
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_01.jpeg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_01.jpeg" alt="Jumat Bersih"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_02.jpeg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_02.jpeg" alt="Jumat Bersih"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_03.jpeg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_03.jpeg" alt="Jumat Bersih"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_04.jpeg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_04.jpeg" alt="Jumat Bersih"></div>
-    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_05.jpeg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_05.jpeg" alt="Jumat Bersih"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_01.jpeg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_01.jpeg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_02.jpeg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_02.jpeg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_03.jpeg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_03.jpeg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_04.jpg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_04.jpg" alt="Dokumentasi"></div>
+    <div class="photoCard" onclick="openLightbox('assets/kurikulum/Jumat_Bersih/foto_05.jpg')"><img class="photoThumb" src="assets/kurikulum/Jumat_Bersih/foto_05.jpg" alt="Dokumentasi"></div>
   </div>
 </div>
 
-<!-- Lightbox Modal Viewer -->
+<!-- Lightbox Modal Viewer (Bersih, Tanpa Teks) -->
 <div id="lightboxModal" class="lightbox" onclick="closeLightbox()">
   <button class="lightboxClose" onclick="closeLightbox()">&times;</button>
   <img id="lightboxImg" class="lightboxContent" src="" alt="Zoom Image">
@@ -115,6 +110,22 @@
 </section></main><footer><div class="wrap"><b>SDN 01 DEMANGAN</b><span>© 2026 · SDN 01 Demangan V31</span></div></footer>
 
 <script>
+// Fungsi untuk Memilih Program yang Tampil
+function switchProgram(programId, btnElement) {
+  // Sembunyikan semua grup foto
+  const groups = document.querySelectorAll('.programGroup');
+  groups.forEach(group => group.classList.remove('active'));
+
+  // Reset status tombol aktif
+  const buttons = document.querySelectorAll('.catBtn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+
+  // Tampilkan grup foto yang dipilih
+  document.getElementById(programId).classList.add('active');
+  btnElement.classList.add('active');
+}
+
+// Fungsi Lightbox Fullscreen Gambar
 function openLightbox(imgSrc) {
   const modal = document.getElementById('lightboxModal');
   const img = document.getElementById('lightboxImg');
