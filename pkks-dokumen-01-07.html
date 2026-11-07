@@ -13,13 +13,18 @@
 .photoCard:hover .photoThumb{transform:scale(1.05)}
 .photoCaption{padding:14px;font-weight:700;font-size:14px;color:#1e293b;text-align:center;background:white}
 
-/* Grid Video (YouTube, TikTok, Instagram) */
-.videoGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;justify-items:center;margin-bottom:40px}
-.videoCard{background:white;border:1px solid #cbd5e1;border-radius:16px;padding:16px;box-shadow:0 10px 25px #0f172a0a;width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center}
-.videoCard iframe{width:100%;border-radius:12px;border:none}
-.youtubeContainer{width:100%;max-width:800px;background:white;border:1px solid #cbd5e1;border-radius:16px;padding:20px;box-shadow:0 10px 25px #0f172a0a;margin-bottom:30px}
+/* Container Pembungkus Seluruh Video agar Terpusat */
+.videoSectionWrapper{display:flex;flex-direction:column;align-items:center;gap:32px;margin-bottom:40px}
+
+/* Video YouTube Center / Posisi Tengah */
+.youtubeContainer{width:100%;max-width:800px;background:white;border:1px solid #cbd5e1;border-radius:16px;padding:20px;box-shadow:0 10px 25px #0f172a0a;margin:0 auto}
 .youtubeWrapper{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0f172a}
 .youtubeWrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+/* Grid Video TikTok & Instagram Di Bawahnya */
+.videoGrid{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;width:100%}
+.videoCard{background:white;border:1px solid #cbd5e1;border-radius:16px;padding:16px;box-shadow:0 10px 25px #0f172a0a;width:100%;max-width:360px;display:flex;flex-direction:column;align-items:center}
+.videoCard iframe{width:100%;border-radius:12px;border:none}
 
 /* Lightbox Modal Viewer Gambar */
 .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.88);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:.3s;padding:20px}
@@ -45,7 +50,6 @@
     <div class="photoCaption">Dokumentasi Kerja Sama 1</div>
   </div>
 
-  <!-- Foto 2 Menggunakan .jpg -->
   <div class="photoCard" onclick="openLightbox('assets/manajemen/01.7/kerjasama_2.jpg', 'Dokumentasi Kerja Sama 2')">
     <div class="photoThumbWrapper"><img class="photoThumb" src="assets/manajemen/01.7/kerjasama_2.jpg" alt="Kerja Sama 2"></div>
     <div class="photoCaption">Dokumentasi Kerja Sama 2</div>
@@ -82,30 +86,32 @@
   </div>
 </div>
 
-<!-- Bagian 2: Video Dokumentasi (YouTube, TikTok, & Instagram) -->
+<!-- Bagian 2: Video Dokumentasi (Tersusun Rapi dan Simetris) -->
 <div class="sectionSubHeader">🎬 Video Dokumentasi Kegiatan Kerja Sama</div>
 
-<!-- Video YouTube -->
-<div class="youtubeContainer">
-  <div style="font-weight:700; margin-bottom:12px; color:#1e293b;">▶ Video YouTube Kegiatan</div>
-  <div class="youtubeWrapper">
-    <iframe src="https://www.youtube.com/embed/5QayF9bKqQw?si=UV8FV0deNkEACU3G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="videoSectionWrapper">
+  <!-- Video YouTube (Center di Atas) -->
+  <div class="youtubeContainer">
+    <div style="font-weight:700; margin-bottom:12px; color:#1e293b; text-align:center;">▶ Video YouTube Kegiatan</div>
+    <div class="youtubeWrapper">
+      <iframe src="https://www.youtube.com/embed/5QayF9bKqQw?si=UV8FV0deNkEACU3G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
   </div>
-</div>
 
-<!-- Video TikTok & Instagram -->
-<div class="videoGrid">
-  <!-- TikTok -->
-  <div class="videoCard">
-    <div style="font-weight:700; margin-bottom:12px; color:#1e293b; text-align:center;">🎵 Video TikTok</div>
-    <iframe height="578" width="325" src="https://www.tiktok.com/player/v1/7643990362956008711?embed_from=webapp_share&music_info=1&description=1&autoplay=0&muted=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share" title="Kunjungan dan Panen Bersama SDN 02 Demangan" allowfullscreen loading="lazy"></iframe>
-  </div>
-  
-  <!-- Instagram Reel -->
-  <div class="videoCard">
-    <div style="font-weight:700; margin-bottom:12px; color:#1e293b; text-align:center;">📸 Video Instagram</div>
-    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DXytwpMxPTW/?utm_source=ig_web_button_share_sheet" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; box-shadow:none; margin:0; max-width:325px; width:100%;"></blockquote>
-    <script async src="//www.instagram.com/embed.js"></script>
+  <!-- Video TikTok & Instagram (Berdampingan Rapi di Bawah) -->
+  <div class="videoGrid">
+    <!-- TikTok -->
+    <div class="videoCard">
+      <div style="font-weight:700; margin-bottom:12px; color:#1e293b; text-align:center;">🎵 Video TikTok</div>
+      <iframe height="578" width="325" src="https://www.tiktok.com/player/v1/7643990362956008711?embed_from=webapp_share&music_info=1&description=1&autoplay=0&muted=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share" title="Kunjungan dan Panen Bersama SDN 02 Demangan" allowfullscreen loading="lazy"></iframe>
+    </div>
+    
+    <!-- Instagram Reel -->
+    <div class="videoCard">
+      <div style="font-weight:700; margin-bottom:12px; color:#1e293b; text-align:center;">📸 Video Instagram</div>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DXytwpMxPTW/?utm_source=ig_web_button_share_sheet" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; box-shadow:none; margin:0; max-width:325px; width:100%;"></blockquote>
+      <script async src="//www.instagram.com/embed.js"></script>
+    </div>
   </div>
 </div>
 
