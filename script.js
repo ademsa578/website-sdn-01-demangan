@@ -49,18 +49,23 @@ if(bot){
 }
 
 
-// --- 4. Solusi Total: Paksa Semua Link Terbuka di Tab yang Sama khusus di HP ---
+// --- 4. Solusi Otomatis Tampil PDF di HP/Android (Tanpa Edit HTML Satu-satu) ---
 document.addEventListener("DOMContentLoaded", function() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     if (isMobile) {
-        // Targetkan SEMUA tag link (<a>) yang ada di seluruh halaman
-        const allLinks = document.querySelectorAll('a');
+        // Cari semua link yang mengarah ke file berformat .pdf di seluruh halaman
+        const pdfLinks = document.querySelectorAll('a[href$=".pdf"]');
         
-        allLinks.forEach(link => {
-            // Hapus atribut target="_blank" dan rel="noopener" jika ada
-            link.removeAttribute('target');
-            link.removeAttribute('rel');
+        pdfLinks.forEach(link => {
+            const originalUrl = link.href;
+            
+            // Jika belum menggunakan viewer Google, otomatis bungkus agar tampil langsung
+            if (!originalUrl.includes("docs.google.com")) {
+                link.href = "https://docs.google.com/gview?url=" + encodeURIComponent(originalUrl) + "&embedded=true";
+                link.removeAttribute('target');
+                link.removeAttribute('rel');
+            }
         });
     }
 });
