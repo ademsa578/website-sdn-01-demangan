@@ -49,19 +49,18 @@ if(bot){
 }
 
 
-// --- 4. Solusi Otomatis Tampil PDF di HP/Android (Tanpa Edit HTML Satu-satu) ---
+// --- 4. Solusi Tepat untuk Kotak Dokumen PDF di HP/Android ---
 document.addEventListener("DOMContentLoaded", function() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     if (isMobile) {
-        // Cari semua link yang mengarah ke file berformat .pdf di seluruh halaman
-        const pdfLinks = document.querySelectorAll('a[href$=".pdf"]');
+        // Cari semua tag <a> atau tombol yang berfungsi membuka file PDF
+        const pdfLinks = document.querySelectorAll('a[href$=".pdf"], a[href*="assets/"]');
         
         pdfLinks.forEach(link => {
             const originalUrl = link.href;
-            
-            // Jika belum menggunakan viewer Google, otomatis bungkus agar tampil langsung
             if (!originalUrl.includes("docs.google.com")) {
+                // Alihkan agar merender langsung via penampil Google di dalam web
                 link.href = "https://docs.google.com/gview?url=" + encodeURIComponent(originalUrl) + "&embedded=true";
                 link.removeAttribute('target');
                 link.removeAttribute('rel');
