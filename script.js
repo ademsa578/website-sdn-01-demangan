@@ -49,18 +49,18 @@ if(bot){
 }
 
 
-// --- 4. Solusi Otomatis Dokumen/PDF di HP/Android ---
+// --- 4. Solusi Total: Paksa Semua Link Terbuka di Tab yang Sama khusus di HP ---
 document.addEventListener("DOMContentLoaded", function() {
-    // Deteksi perangkat HP / Android / Tablet
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     if (isMobile) {
-        // Cari semua link dokumen (file .pdf atau yang ada di dalam folder assets)
-        const links = document.querySelectorAll('a[href$=".pdf"], a[href*="assets/"]');
+        // Targetkan SEMUA tag link (<a>) yang ada di seluruh halaman
+        const allLinks = document.querySelectorAll('a');
         
-        links.forEach(link => {
-            // Hapus atribut target="_blank" agar terbuka di halaman/tab yang sama pada HP
+        allLinks.forEach(link => {
+            // Hapus atribut target="_blank" dan rel="noopener" jika ada
             link.removeAttribute('target');
+            link.removeAttribute('rel');
         });
     }
 });
