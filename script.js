@@ -15,7 +15,7 @@ function answer(q){
     if(q.includes("program"))return"Program unggulan pada template: Adiwiyata, PMR, PUSAKA PJOK, dan Kembang Krambil.";
     if(q.includes("ppdb")||q.includes("spmb"))return"Bagian SPMB/PPDB dapat diarahkan ke halaman informasi dan formulir resmi sekolah.";
     if(q.includes("kontak"))return"Kontak resmi sekolah dapat ditambahkan di bagian Kontak setelah data diberikan.";
-    return"Terima kasih! Saya adalah Demangan AI. Jawaban dan data sekolah dapat kita sambungkan ke informasi resmi pada tahap berikutnya.";
+    return"Terima kasih! Sabah Demangan AI. Jawaban dan data sekolah dapat kita sambungkan ke informasi resmi pada tahap berikutnya.";
 }
 
 send.onclick=()=>{
@@ -49,22 +49,29 @@ if(bot){
 }
 
 
-// --- 4. Solusi Tepat untuk Kotak Dokumen PDF di HP/Android ---
+// --- 4. Solusi Otomatis Tembus PDF di HP/Android (Tanpa Edit HTML Satu-satu) ---
+// Kita override fungsi showPdf bawaan khusus jika dibuka dari perangkat mobile
 document.addEventListener("DOMContentLoaded", function() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    if (isMobile) {
-        // Cari semua tag <a> atau tombol yang berfungsi membuka file PDF
-        const pdfLinks = document.querySelectorAll('a[href$=".pdf"], a[href*="assets/"]');
+    if (isMobile && typeof window.showPdf === 'function') {
+        // Simpan fungsi asli
+        const originalShowPdf = window.showPdf;
         
-        pdfLinks.forEach(link => {
-            const originalUrl = link.href;
-            if (!originalUrl.includes("docs.google.com")) {
-                // Alihkan agar merender langsung via penampil Google di dalam web
-                link.href = "https://docs.google.com/gview?url=" + encodeURIComponent(originalUrl) + "&embedded=true";
-                link.removeAttribute('target');
-                link.removeAttribute('rel');
+        // Timpa dengan fungsi baru yang otomatis membungkus link PDF ke Google Viewer
+        window.showPdf = function(pdfUrl, titleText, element) {
+            // Ubah link lokal menjadi absolute URL jika diperlukan oleh Google Viewer
+            let fullUrl = pdfUrl;
+            if (!pdfUrl.startsWith('http')) {
+                // Ambil base URL website saat ini
+                fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfUrl;
             }
-        });
+            
+            // Bungkus menggunakan Google Docs Viewer agar aman tampil di dalam iframe HP
+            const embeddedUrl = "https://docs.google.com/gview?url=" + encodeURIComponent(fullUrl) + "&embedded=true";
+            
+            // Jalankan fungsi asli menggunakan URL yang sudah dibungkus
+            originalShowPdf(embeddedUrl, titleText, element);
+        };
     }
 });
