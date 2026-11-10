@@ -49,51 +49,53 @@ if(bot){
 }
 
 
-// --- 4. Solusi Universal Interceptor PDF (Otomatis Aktif di Seluruh Halaman) ---
+// --- 4. SOLUSI GLOBAL UTAMA: Paksa Semua Link/Tombol PDF Tampil di Dalam Web ---
 document.addEventListener("DOMContentLoaded", function() {
-    // Tangkap semua klik pada elemen kartu atau link yang berformat PDF
+    // Jalankan pengecekan pada setiap klik di seluruh halaman
     document.body.addEventListener("click", function(e) {
-        // Cari apakah yang diklik adalah kartu PDF atau link yang mengarah ke file .pdf
-        let card = e.target.closest('.pdfCard, a[href$=".pdf"]');
-        if (!card) return;
+        // Cari apakah yang diklik adalah link berakhiran .pdf atau kartu dengan onclick
+        let target = e.target.closest('a, .pdfCard');
+        if (!target) return;
 
         let pdfUrl = "";
         let titleText = "Dokumen PDF";
 
-        // Jika bentuknya kartu dengan atribut onclick (seperti 01.1)
-        if (card.classList.contains('pdfCard')) {
-            let onClickAttr = card.getAttribute('onclick');
+        // Kasus A: Jika berupa link biasa (tag <a>) yang mengarah ke file .pdf
+        if (target.tagName === 'A') {
+            let href = target.getAttribute('href');
+            if (href && (href.toLowerCase().endsWith('.pdf') || href.includes('assets/'))) {
+                pdfUrl = href;
+                titleText = target.innerText.trim() || target.getAttribute('title') || "Dokumen PDF";
+                e.preventDefault(); // Cegah buka tab baru
+            }
+        }
+        // Kasus B: Jika berupa kartu dengan fungsi onclick (seperti 01.1)
+        else if (target.classList.contains('pdfCard')) {
+            let onClickAttr = target.getAttribute('onclick');
             if (onClickAttr && onClickAttr.includes('showPdf')) {
                 let match = onClickAttr.match(/showPdf\(['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]/);
                 if (match) {
                     pdfUrl = match[1];
                     titleText = match[2];
+                    e.preventDefault(); // Cegah fungsi bawaan bentrok
                 }
             }
-            // Batalkan aksi bawaan agar tidak bentrok
-            e.preventDefault();
-        } 
-        // Jika bentuknya link biasa berakhiran .pdf
-        else if (card.tagName === 'A') {
-            pdfUrl = card.getAttribute('href');
-            titleText = card.innerText || "Dokumen PDF";
-            e.preventDefault();
         }
 
+        // Jika URL PDF ditemukan, buka menggunakan penampil universal
         if (pdfUrl) {
-            openGlobalPdfViewer(pdfUrl, titleText, card);
+            openGlobalPdfViewer(pdfUrl, titleText, target);
         }
     });
 });
 
-// Fungsi Global untuk Membuka Viewer PDF.js di Semua Halaman
-function openGlobalPdfViewer(pdfUrl, titleText, element) {
+// Fungsi Universal untuk Membuka Viewer PDF.js di Halaman Manapun
+window.openGlobalPdfViewer = function(pdfUrl, titleText, element) {
     let viewerBox = document.getElementById('pdfViewerBox');
     
-    // Jika di halaman tersebut belum ada kotak viewer, buat secara otomatis di bawah grid dokumen
+    // Jika di halaman tersebut belum ada kotak viewer, buat secara otomatis di bawah elemen utama
     if (!viewerBox) {
-        let grid = document.querySelector('.pdfGrid') || document.querySelector('.grid') || document.querySelector('main');
-        if (!grid) return;
+        let container = document.querySelector('.pkksWrap') || document.querySelector('main') || document.body;
         
         viewerBox = document.createElement('div');
         viewerBox.id = 'pdfViewerBox';
@@ -106,9 +108,10 @@ function openGlobalPdfViewer(pdfUrl, titleText, element) {
             </div>
             <iframe id="pdfFrame" style="width:100%; height:650px; border:none; border-radius:8px; background:#f8fafc;" src=""></iframe>
         `;
-        grid.parentNode.insertBefore(viewerBox, grid.nextSibling);
+        container.appendChild(viewerBox);
     } else {
         viewerBox.style.display = "block";
+        viewerBox.classList.add('active');
     }
 
     const pdfFrame = document.getElementById('pdfFrame');
@@ -120,18 +123,19 @@ function openGlobalPdfViewer(pdfUrl, titleText, element) {
         fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfUrl;
     }
     
+    // Gunakan Mozilla PDF.js Viewer
     const viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
 
     if (pdfFrame) pdfFrame.src = viewerUrl;
     if (titleTextEl) titleTextEl.innerText = "📁 " + titleText;
-    viewerBox.classList.add('active');
 
-    // Tandai kartu aktif jika ada
+    // Tandai elemen aktif jika berupa kartu
     document.querySelectorAll('.pdfCard').forEach(c => c.classList.remove('active'));
     if (element && element.classList.contains('pdfCard')) element.classList.add('active');
 
+    // Gulir halus ke arah kotak viewer di bawah
     viewerBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
+};
 
 // Fungsi Global untuk Menutup Penampil PDF
 window.closeGlobalPdfViewer = function() {
@@ -145,7 +149,7 @@ window.closeGlobalPdfViewer = function() {
     document.querySelectorAll('.pdfCard').forEach(card => card.classList.remove('active'));
 };
 
-// Cadangan fungsi showPdf agar halaman lama tidak error
+// Backup fungsi showPdf agar tidak error di halaman 01.1
 window.showPdf = function(pdfUrl, titleText, element) {
     openGlobalPdfViewer(pdfUrl, titleText, element);
 };
