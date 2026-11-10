@@ -49,29 +49,46 @@ if(bot){
 }
 
 
-// --- 4. OTOMATISASI MASSAL: Mengubah Semua Iframe PDF di Seluruh Website Tanpa Edit HTML ---
+// --- 4. OTOMATISASI GLOBAL UNTUK SEMUA HALAMAN PDF ---
 document.addEventListener("DOMContentLoaded", function() {
-    // Cari semua iframe di halaman manapun
+    // A. Tangkap semua iframe yang ada di halaman manapun
     const iframes = document.querySelectorAll('iframe');
     
     iframes.forEach(iframe => {
         let src = iframe.getAttribute('src');
-        // Jika iframe memuat file .pdf lokal (baik di folder assets/ atau lainnya)
         if (src && (src.toLowerCase().endsWith('.pdf') || src.includes('assets/'))) {
-            // Cek agar tidak dibungkus dua kali jika sudah pakai viewer
             if (!src.includes('mozilla.github.io')) {
                 let fullUrl = src;
                 if (!src.startsWith('http')) {
                     fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + src;
                 }
-                
-                // Otomatis ubah src iframe menjadi penampil PDF.js
                 iframe.src = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
             }
         }
     });
 
-    // Tangkap juga klik pada kartu interaktif (seperti halaman 01.1)
+    // B. Tangkap wadah kosong (.pdfFrameWrapperFull) jika ada halaman yang framenya belum diisi src
+    const wrappers = document.querySelectorAll('.pdfFrameWrapperFull');
+    wrappers.forEach(wrapper => {
+        let iframe = wrapper.querySelector('iframe');
+        // Jika iframe di dalam wrapper kosong atau belum menggunakan PDF.js
+        if (iframe && (!iframe.getAttribute('src') || !iframe.getAttribute('src').includes('mozilla.github.io'))) {
+            // Cari tahu file PDF dari tombol unduh terdekat di halaman tersebut
+            let downloadBtn = wrapper.closest('.pdfFullCard')?.querySelector('.pdfDownloadBtn');
+            if (downloadBtn) {
+                let pdfUrl = downloadBtn.getAttribute('href');
+                if (pdfUrl && pdfUrl.endsWith('.pdf')) {
+                    let fullUrl = pdfUrl;
+                    if (!pdfUrl.startsWith('http')) {
+                        fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfUrl;
+                    }
+                    iframe.src = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+                }
+            }
+        }
+    });
+
+    // C. Tangkap juga klik pada kartu interaktif (seperti halaman 01.1)
     document.body.addEventListener("click", function(e) {
         let target = e.target.closest('.pdfCard');
         if (!target) return;
