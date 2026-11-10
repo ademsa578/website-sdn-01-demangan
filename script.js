@@ -49,62 +49,103 @@ if(bot){
 }
 
 
-// --- 4. Solusi Global PDF Viewer (Berlaku untuk Semua Komponen PKKS) ---
-// Fungsi ini otomatis menggantikan showPdf lokal di setiap halaman komponen
-window.showPdf = function(pdfUrl, titleText, element) {
-    let viewerBox = document.getElementById('pdfViewerBox');
-    let pdfFrame = document.getElementById('pdfFrame');
-    let titleTextEl = document.getElementById('pdfTitleText');
+// --- 4. Solusi Universal Interceptor PDF (Otomatis Aktif di Seluruh Halaman) ---
+document.addEventListener("DOMContentLoaded", function() {
+    // Tangkap semua klik pada elemen kartu atau link yang berformat PDF
+    document.body.addEventListener("click", function(e) {
+        // Cari apakah yang diklik adalah kartu PDF atau link yang mengarah ke file .pdf
+        let card = e.target.closest('.pdfCard, a[href$=".pdf"]');
+        if (!card) return;
 
-    // Jika container viewer belum ada di halaman tersebut, buat secara otomatis
+        let pdfUrl = "";
+        let titleText = "Dokumen PDF";
+
+        // Jika bentuknya kartu dengan atribut onclick (seperti 01.1)
+        if (card.classList.contains('pdfCard')) {
+            let onClickAttr = card.getAttribute('onclick');
+            if (onClickAttr && onClickAttr.includes('showPdf')) {
+                let match = onClickAttr.match(/showPdf\(['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]/);
+                if (match) {
+                    pdfUrl = match[1];
+                    titleText = match[2];
+                }
+            }
+            // Batalkan aksi bawaan agar tidak bentrok
+            e.preventDefault();
+        } 
+        // Jika bentuknya link biasa berakhiran .pdf
+        else if (card.tagName === 'A') {
+            pdfUrl = card.getAttribute('href');
+            titleText = card.innerText || "Dokumen PDF";
+            e.preventDefault();
+        }
+
+        if (pdfUrl) {
+            openGlobalPdfViewer(pdfUrl, titleText, card);
+        }
+    });
+});
+
+// Fungsi Global untuk Membuka Viewer PDF.js di Semua Halaman
+function openGlobalPdfViewer(pdfUrl, titleText, element) {
+    let viewerBox = document.getElementById('pdfViewerBox');
+    
+    // Jika di halaman tersebut belum ada kotak viewer, buat secara otomatis di bawah grid dokumen
     if (!viewerBox) {
-        const grid = document.querySelector('.pdfGrid');
+        let grid = document.querySelector('.pdfGrid') || document.querySelector('.grid') || document.querySelector('main');
         if (!grid) return;
         
         viewerBox = document.createElement('div');
         viewerBox.id = 'pdfViewerBox';
         viewerBox.className = 'pdfViewerContainer';
+        viewerBox.style.cssText = "background:white; border:1px solid #cbd5e1; border-radius:16px; padding:20px; box-shadow:0 10px 25px #0f172a0a; margin-top:30px; margin-bottom:40px; display:block;";
         viewerBox.innerHTML = `
-            <div class="pdfViewerHeader">
+            <div class="pdfViewerHeader" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; font-weight:700; font-size:16px; color:#0f172a; border-bottom:1px solid #e2e8f0; padding-bottom:10px;">
                 <span id="pdfTitleText">Memuat Dokumen...</span>
-                <span style="font-size:13px; color:#087f68; cursor:pointer;" onclick="closePdf()">Tutup [✕]</span>
+                <span style="font-size:13px; color:#087f68; cursor:pointer; font-weight:bold;" onclick="closeGlobalPdfViewer()">Tutup [✕]</span>
             </div>
-            <iframe id="pdfFrame" class="pdfIframe" src=""></iframe>
+            <iframe id="pdfFrame" style="width:100%; height:650px; border:none; border-radius:8px; background:#f8fafc;" src=""></iframe>
         `;
         grid.parentNode.insertBefore(viewerBox, grid.nextSibling);
-        
-        pdfFrame = document.getElementById('pdfFrame');
-        titleTextEl = document.getElementById('pdfTitleText');
+    } else {
+        viewerBox.style.display = "block";
     }
 
-    // Rakit URL absolut file PDF
+    const pdfFrame = document.getElementById('pdfFrame');
+    const titleTextEl = document.getElementById('pdfTitleText');
+
+    // Ubah URL relatif menjadi absolute URL agar aman dibaca oleh PDF.js
     let fullUrl = pdfUrl;
     if (!pdfUrl.startsWith('http')) {
         fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfUrl;
     }
-
-    // Gunakan Mozilla PDF.js Viewer yang kompatibel di semua browser HP & Desktop
+    
     const viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
 
-    pdfFrame.src = viewerUrl;
-    titleTextEl.innerText = "📁 " + titleText;
-
-    // Tampilkan penampil dokumen
+    if (pdfFrame) pdfFrame.src = viewerUrl;
+    if (titleTextEl) titleTextEl.innerText = "📁 " + titleText;
     viewerBox.classList.add('active');
 
-    // Tandai kartu yang aktif
-    document.querySelectorAll('.pdfCard').forEach(card => card.classList.remove('active'));
-    if (element) element.classList.add('active');
+    // Tandai kartu aktif jika ada
+    document.querySelectorAll('.pdfCard').forEach(c => c.classList.remove('active'));
+    if (element && element.classList.contains('pdfCard')) element.classList.add('active');
 
-    // Gulir ke area penampil PDF
     viewerBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-};
+}
 
 // Fungsi Global untuk Menutup Penampil PDF
-window.closePdf = function() {
+window.closeGlobalPdfViewer = function() {
     const viewerBox = document.getElementById('pdfViewerBox');
     const pdfFrame = document.getElementById('pdfFrame');
     if (pdfFrame) pdfFrame.src = "";
-    if (viewerBox) viewerBox.classList.remove('active');
+    if (viewerBox) {
+        viewerBox.classList.remove('active');
+        viewerBox.style.display = "none";
+    }
     document.querySelectorAll('.pdfCard').forEach(card => card.classList.remove('active'));
+};
+
+// Cadangan fungsi showPdf agar halaman lama tidak error
+window.showPdf = function(pdfUrl, titleText, element) {
+    openGlobalPdfViewer(pdfUrl, titleText, element);
 };
