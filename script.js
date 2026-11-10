@@ -49,60 +49,47 @@ if(bot){
 }
 
 
-// --- 4. OTOMATISASI GLOBAL: Ubah semua iframe PDF langsung render via PDF.js ---
+// --- 4. OTOMATISASI MASSAL: Mengubah Semua Iframe PDF di Seluruh Website Tanpa Edit HTML ---
 document.addEventListener("DOMContentLoaded", function() {
-    // Cari semua iframe yang memuat file PDF di seluruh halaman website
+    // Cari semua iframe di halaman manapun
     const iframes = document.querySelectorAll('iframe');
     
     iframes.forEach(iframe => {
         let src = iframe.getAttribute('src');
-        // Jika iframe memuat file .pdf lokal
+        // Jika iframe memuat file .pdf lokal (baik di folder assets/ atau lainnya)
         if (src && (src.toLowerCase().endsWith('.pdf') || src.includes('assets/'))) {
-            // Ubah link relatif menjadi absolute URL
-            let fullUrl = src;
-            if (!src.startsWith('http')) {
-                fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + src;
+            // Cek agar tidak dibungkus dua kali jika sudah pakai viewer
+            if (!src.includes('mozilla.github.io')) {
+                let fullUrl = src;
+                if (!src.startsWith('http')) {
+                    fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + src;
+                }
+                
+                // Otomatis ubah src iframe menjadi penampil PDF.js
+                iframe.src = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
             }
-            
-            // Bungkus menggunakan Mozilla PDF.js Viewer agar mulus terbaca di HP
-            iframe.src = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
         }
     });
 
-    // Tangkap juga klik pada kartu berformat onclick atau link biasa
+    // Tangkap juga klik pada kartu interaktif (seperti halaman 01.1)
     document.body.addEventListener("click", function(e) {
-        let target = e.target.closest('a, .pdfCard');
+        let target = e.target.closest('.pdfCard');
         if (!target) return;
 
-        let pdfUrl = "";
-        let titleText = "Dokumen PDF";
-
-        if (target.tagName === 'A') {
-            let href = target.getAttribute('href');
-            if (href && (href.toLowerCase().endsWith('.pdf') || href.includes('assets/'))) {
-                pdfUrl = href;
-                titleText = target.innerText.trim() || target.getAttribute('title') || "Dokumen PDF";
+        let onClickAttr = target.getAttribute('onclick');
+        if (onClickAttr && onClickAttr.includes('showPdf')) {
+            let match = onClickAttr.match(/showPdf\(['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]/);
+            if (match) {
+                let pdfUrl = match[1];
+                let titleText = match[2];
                 e.preventDefault();
+                openGlobalPdfViewer(pdfUrl, titleText, target);
             }
-        } else if (target.classList.contains('pdfCard')) {
-            let onClickAttr = target.getAttribute('onclick');
-            if (onClickAttr && onClickAttr.includes('showPdf')) {
-                let match = onClickAttr.match(/showPdf\(['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]/);
-                if (match) {
-                    pdfUrl = match[1];
-                    titleText = match[2];
-                    e.preventDefault();
-                }
-            }
-        }
-
-        if (pdfUrl) {
-            openGlobalPdfViewer(pdfUrl, titleText, target);
         }
     });
 });
 
-// Fungsi Global untuk Halaman Interaktif (seperti 01.1)
+// Fungsi Global untuk Kartu Interaktif
 window.openGlobalPdfViewer = function(pdfUrl, titleText, element) {
     let viewerBox = document.getElementById('pdfViewerBox');
     
