@@ -49,54 +49,65 @@ if(bot){
 }
 
 
-// --- 4. SOLUSI GLOBAL UTAMA: Paksa Semua Link/Tombol PDF Tampil di Dalam Web ---
+// --- 4. OTOMATISASI GLOBAL: Ubah semua iframe PDF langsung render via PDF.js ---
 document.addEventListener("DOMContentLoaded", function() {
-    // Jalankan pengecekan pada setiap klik di seluruh halaman
+    // Cari semua iframe yang memuat file PDF di seluruh halaman website
+    const iframes = document.querySelectorAll('iframe');
+    
+    iframes.forEach(iframe => {
+        let src = iframe.getAttribute('src');
+        // Jika iframe memuat file .pdf lokal
+        if (src && (src.toLowerCase().endsWith('.pdf') || src.includes('assets/'))) {
+            // Ubah link relatif menjadi absolute URL
+            let fullUrl = src;
+            if (!src.startsWith('http')) {
+                fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + src;
+            }
+            
+            // Bungkus menggunakan Mozilla PDF.js Viewer agar mulus terbaca di HP
+            iframe.src = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+        }
+    });
+
+    // Tangkap juga klik pada kartu berformat onclick atau link biasa
     document.body.addEventListener("click", function(e) {
-        // Cari apakah yang diklik adalah link berakhiran .pdf atau kartu dengan onclick
         let target = e.target.closest('a, .pdfCard');
         if (!target) return;
 
         let pdfUrl = "";
         let titleText = "Dokumen PDF";
 
-        // Kasus A: Jika berupa link biasa (tag <a>) yang mengarah ke file .pdf
         if (target.tagName === 'A') {
             let href = target.getAttribute('href');
             if (href && (href.toLowerCase().endsWith('.pdf') || href.includes('assets/'))) {
                 pdfUrl = href;
                 titleText = target.innerText.trim() || target.getAttribute('title') || "Dokumen PDF";
-                e.preventDefault(); // Cegah buka tab baru
+                e.preventDefault();
             }
-        }
-        // Kasus B: Jika berupa kartu dengan fungsi onclick (seperti 01.1)
-        else if (target.classList.contains('pdfCard')) {
+        } else if (target.classList.contains('pdfCard')) {
             let onClickAttr = target.getAttribute('onclick');
             if (onClickAttr && onClickAttr.includes('showPdf')) {
                 let match = onClickAttr.match(/showPdf\(['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]/);
                 if (match) {
                     pdfUrl = match[1];
                     titleText = match[2];
-                    e.preventDefault(); // Cegah fungsi bawaan bentrok
+                    e.preventDefault();
                 }
             }
         }
 
-        // Jika URL PDF ditemukan, buka menggunakan penampil universal
         if (pdfUrl) {
             openGlobalPdfViewer(pdfUrl, titleText, target);
         }
     });
 });
 
-// Fungsi Universal untuk Membuka Viewer PDF.js di Halaman Manapun
+// Fungsi Global untuk Halaman Interaktif (seperti 01.1)
 window.openGlobalPdfViewer = function(pdfUrl, titleText, element) {
     let viewerBox = document.getElementById('pdfViewerBox');
     
-    // Jika di halaman tersebut belum ada kotak viewer, buat secara otomatis di bawah elemen utama
     if (!viewerBox) {
         let container = document.querySelector('.pkksWrap') || document.querySelector('main') || document.body;
-        
         viewerBox = document.createElement('div');
         viewerBox.id = 'pdfViewerBox';
         viewerBox.className = 'pdfViewerContainer';
@@ -117,27 +128,22 @@ window.openGlobalPdfViewer = function(pdfUrl, titleText, element) {
     const pdfFrame = document.getElementById('pdfFrame');
     const titleTextEl = document.getElementById('pdfTitleText');
 
-    // Ubah URL relatif menjadi absolute URL agar aman dibaca oleh PDF.js
     let fullUrl = pdfUrl;
     if (!pdfUrl.startsWith('http')) {
         fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfUrl;
     }
     
-    // Gunakan Mozilla PDF.js Viewer
     const viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
 
     if (pdfFrame) pdfFrame.src = viewerUrl;
     if (titleTextEl) titleTextEl.innerText = "📁 " + titleText;
 
-    // Tandai elemen aktif jika berupa kartu
     document.querySelectorAll('.pdfCard').forEach(c => c.classList.remove('active'));
     if (element && element.classList.contains('pdfCard')) element.classList.add('active');
 
-    // Gulir halus ke arah kotak viewer di bawah
     viewerBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 };
 
-// Fungsi Global untuk Menutup Penampil PDF
 window.closeGlobalPdfViewer = function() {
     const viewerBox = document.getElementById('pdfViewerBox');
     const pdfFrame = document.getElementById('pdfFrame');
@@ -149,7 +155,6 @@ window.closeGlobalPdfViewer = function() {
     document.querySelectorAll('.pdfCard').forEach(card => card.classList.remove('active'));
 };
 
-// Backup fungsi showPdf agar tidak error di halaman 01.1
 window.showPdf = function(pdfUrl, titleText, element) {
     openGlobalPdfViewer(pdfUrl, titleText, element);
 };
