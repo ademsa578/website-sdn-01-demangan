@@ -11,7 +11,7 @@
 .pdfDownloadBtn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#087f68;color:white;border-radius:8px;text-decoration:none;font-weight:700;font-size:12px;transition:.2s}
 .pdfDownloadBtn:hover{background:#066251}
 
-/* Layar Iframe Ekstra Luas */
+/* Layar Iframe Ekstra Luas dengan PDF.js Viewer */
 .pdfFrameWrapperFull{width:100%;height:850px;border-radius:12px;overflow:hidden;border:1px solid #cbd5e1;background:#525659}
 .pdfFrameWrapperFull iframe{width:100%;height:100%;border:none}
 
@@ -23,15 +23,33 @@
 
 <div class="statsGrid"><div class="statCard"><div class="statNum">Tahun 2026</div><div class="statLabel">Periode Pencatatan</div></div><div class="statCard"><div class="statNum">Terverifikasi</div><div class="statLabel">Validasi Hard Copy</div></div><div class="statCard"><div class="statNum">Format PDF</div><div class="statLabel">Arsip Resmi</div></div></div>
 
-<!-- Layar Pratinjau Luas -->
+<!-- Layar Pratinjau Luas menggunakan Mozilla PDF.js Viewer langsung -->
 <div class="pdfFullCard">
   <div class="pdfHeaderRow">
     <div class="pdfHeaderTitle"><span>📖</span> Pratinjau Buku Izin Keluar (Dokumen Asli)</div>
-    <a class="pdfDownloadBtn" href="assets/buku-izin-keluar.pdf" target="_blank">Unduh File Original PDF ↗</a>
+    <!-- Tombol unduh tanpa target="_blank" agar tidak membuka tab baru secara paksa jika diatur mendownload langsung -->
+    <a class="pdfDownloadBtn" href="assets/buku-izin-keluar.pdf" download>Unduh File PDF ⬇</a>
   </div>
   <div class="pdfFrameWrapperFull">
-    <iframe src="assets/buku-izin-keluar.pdf" title="Pratinjau Buku Izin Keluar"></iframe>
+    <!-- Langsung arahkan iframe menggunakan Mozilla PDF.js Viewer agar mulus di HP -->
+    <iframe id="pdfViewerFrame" title="Pratinjau Buku Izin Keluar"></iframe>
   </div>
 </div>
 
-<div class="actionRow"><a class="actionLink secondary" href="pkks.html">← Kembali ke semua komponen PKKS</a></div></article></section></main><footer><div class="wrap"><b>SDN 01 DEMANGAN</b><span>© 2026 · SDN 01 Demangan V31</span></div></footer><script src="script.js"></script></body></html>
+<div class="actionRow"><a class="actionLink secondary" href="pkks.html">← Kembali ke semua komponen PKKS</a></div></article></section></main><footer><div class="wrap"><b>SDN 01 DEMANGAN</b><span>© 2026 · SDN 01 Demangan V31</span></div></footer>
+
+<script>
+// Script otomatis merakit link PDF.js agar iframe langsung merender dokumen di dalam halaman
+document.addEventListener("DOMContentLoaded", function() {
+    const pdfPath = "assets/buku-izin-keluar.pdf";
+    let fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfPath;
+    
+    const viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+    
+    const iframe = document.getElementById('pdfViewerFrame');
+    if (iframe) {
+        iframe.src = viewerUrl;
+    }
+});
+</script>
+<script src="script.js"></script></body></html>
