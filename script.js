@@ -15,7 +15,7 @@ function answer(q){
     if(q.includes("program"))return"Program unggulan pada template: Adiwiyata, PMR, PUSAKA PJOK, dan Kembang Krambil.";
     if(q.includes("ppdb")||q.includes("spmb"))return"Bagian SPMB/PPDB dapat diarahkan ke halaman informasi dan formulir resmi sekolah.";
     if(q.includes("kontak"))return"Kontak resmi sekolah dapat ditambahkan di bagian Kontak setelah data diberikan.";
-    return"Terima kasih! Sabah Demangan AI. Jawaban dan data sekolah dapat kita sambungkan ke informasi resmi pada tahap berikutnya.";
+    return"Terima kasih! Saya adalah Demangan AI. Jawaban dan data sekolah dapat kita sambungkan ke informasi resmi pada tahap berikutnya.";
 }
 
 send.onclick=()=>{
@@ -49,29 +49,62 @@ if(bot){
 }
 
 
-// --- 4. Solusi Otomatis Tembus PDF di HP/Android (Tanpa Edit HTML Satu-satu) ---
-// Kita override fungsi showPdf bawaan khusus jika dibuka dari perangkat mobile
-document.addEventListener("DOMContentLoaded", function() {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    if (isMobile && typeof window.showPdf === 'function') {
-        // Simpan fungsi asli
-        const originalShowPdf = window.showPdf;
+// --- 4. Solusi Global PDF Viewer (Berlaku untuk Semua Komponen PKKS) ---
+// Fungsi ini otomatis menggantikan showPdf lokal di setiap halaman komponen
+window.showPdf = function(pdfUrl, titleText, element) {
+    let viewerBox = document.getElementById('pdfViewerBox');
+    let pdfFrame = document.getElementById('pdfFrame');
+    let titleTextEl = document.getElementById('pdfTitleText');
+
+    // Jika container viewer belum ada di halaman tersebut, buat secara otomatis
+    if (!viewerBox) {
+        const grid = document.querySelector('.pdfGrid');
+        if (!grid) return;
         
-        // Timpa dengan fungsi baru yang otomatis membungkus link PDF ke Google Viewer
-        window.showPdf = function(pdfUrl, titleText, element) {
-            // Ubah link lokal menjadi absolute URL jika diperlukan oleh Google Viewer
-            let fullUrl = pdfUrl;
-            if (!pdfUrl.startsWith('http')) {
-                // Ambil base URL website saat ini
-                fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfUrl;
-            }
-            
-            // Bungkus menggunakan Google Docs Viewer agar aman tampil di dalam iframe HP
-            const embeddedUrl = "https://docs.google.com/gview?url=" + encodeURIComponent(fullUrl) + "&embedded=true";
-            
-            // Jalankan fungsi asli menggunakan URL yang sudah dibungkus
-            originalShowPdf(embeddedUrl, titleText, element);
-        };
+        viewerBox = document.createElement('div');
+        viewerBox.id = 'pdfViewerBox';
+        viewerBox.className = 'pdfViewerContainer';
+        viewerBox.innerHTML = `
+            <div class="pdfViewerHeader">
+                <span id="pdfTitleText">Memuat Dokumen...</span>
+                <span style="font-size:13px; color:#087f68; cursor:pointer;" onclick="closePdf()">Tutup [✕]</span>
+            </div>
+            <iframe id="pdfFrame" class="pdfIframe" src=""></iframe>
+        `;
+        grid.parentNode.insertBefore(viewerBox, grid.nextSibling);
+        
+        pdfFrame = document.getElementById('pdfFrame');
+        titleTextEl = document.getElementById('pdfTitleText');
     }
-});
+
+    // Rakit URL absolut file PDF
+    let fullUrl = pdfUrl;
+    if (!pdfUrl.startsWith('http')) {
+        fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfUrl;
+    }
+
+    // Gunakan Mozilla PDF.js Viewer yang kompatibel di semua browser HP & Desktop
+    const viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+
+    pdfFrame.src = viewerUrl;
+    titleTextEl.innerText = "📁 " + titleText;
+
+    // Tampilkan penampil dokumen
+    viewerBox.classList.add('active');
+
+    // Tandai kartu yang aktif
+    document.querySelectorAll('.pdfCard').forEach(card => card.classList.remove('active'));
+    if (element) element.classList.add('active');
+
+    // Gulir ke area penampil PDF
+    viewerBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+};
+
+// Fungsi Global untuk Menutup Penampil PDF
+window.closePdf = function() {
+    const viewerBox = document.getElementById('pdfViewerBox');
+    const pdfFrame = document.getElementById('pdfFrame');
+    if (pdfFrame) pdfFrame.src = "";
+    if (viewerBox) viewerBox.classList.remove('active');
+    document.querySelectorAll('.pdfCard').forEach(card => card.classList.remove('active'));
+};
