@@ -72,8 +72,23 @@ function showPdf(pdfUrl, titleText, element) {
   const pdfFrame = document.getElementById('pdfFrame');
   const titleTextEl = document.getElementById('pdfTitleText');
 
+  // Deteksi perangkat HP / Android / iOS
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  let finalUrl = pdfUrl;
+
+  if (isMobile) {
+    // Ubah link relatif menjadi URL mutlak (absolute URL) agar terbaca oleh Google Viewer
+    let fullUrl = pdfUrl;
+    if (!pdfUrl.startsWith('http')) {
+      fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfUrl;
+    }
+    // Bungkus menggunakan Google Docs Viewer khusus perangkat seluler
+    finalUrl = "https://docs.google.com/gview?url=" + encodeURIComponent(fullUrl) + "&embedded=true";
+  }
+
   // Atur sumber PDF dan judul
-  pdfFrame.src = pdfUrl;
+  pdfFrame.src = finalUrl;
   titleTextEl.innerText = "📁 " + titleText;
 
   // Tampilkan box viewer
