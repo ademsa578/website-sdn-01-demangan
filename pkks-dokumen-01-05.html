@@ -11,8 +11,10 @@
 /* Area Tampilan Dokumen di Bawah */
 .viewerContainer{background:white;border:1px solid #cbd5e1;border-radius:16px;padding:24px;box-shadow:0 10px 25px #0f172a0a;margin-top:20px;display:none}
 .viewerContainer.active{display:block}
-.viewerTitle{font:700 18px Manrope,sans-serif;color:#0f172a;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.viewerTitle{font:700 18px Manrope,sans-serif;color:#0f172a;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .pdfFrame{width:100%;height:650px;border:1px solid #cbd5e1;border-radius:12px;background:#f8fafc}
+.pdfDownloadLink{font-size:13px;color:#087f68;text-decoration:none;font-weight:700;background:#e6f4f1;padding:6px 12px;border-radius:6px}
+.pdfDownloadLink:hover{background:#087f68;color:white}
 
 .actionRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:40px}
 .actionLink{display:inline-block;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:700;font-size:14px}
@@ -22,7 +24,7 @@
 @media(max-width:768px){.pkksWrap{padding-top:24px}.rapatBtn{width:100%;justify-content:center}.pdfFrame{height:450px}}
 </style></head><body><div class="announcement"><span>✦ SDN 01 DEMANGAN</span><span>Smart School • Karakter • Prestasi</span></div><header><div class="nav"><a class="brand" href="index.html"><span class="brandMark"><img alt="Logo SDN 01 Demangan" src="assets/logo.jpg"></span><div><b>SDN 01 DEMANGAN</b><small>SMART SCHOOL</small></div></a><button id="menu">☰</button><nav class="siteNav"><a data-page="home" href="index.html">Home</a><a data-page="profil" href="profil.html">Profil</a><a data-page="program" href="program.html">Program</a><a data-page="ekstrakurikuler" href="ekstrakurikuler.html">Ekstrakurikuler</a><a data-page="berita" href="berita.html">Berita</a><a data-page="prestasi" href="prestasi.html">Prestasi</a><a class="active" data-page="pkks" href="pkks.html">PKKS</a><a data-page="galeri" href="galeri.html">Galeri</a></nav><a class="navbtn" href="kontak.html">Kontak ↗</a></div></header><main><section class="pkksWrap"><div class="crumb"><a href="index.html">Beranda</a> / <a href="pkks.html">PKKS</a> / <a href="pkks-01-kepribadian-dan-sosial.html">Komponen 01</a> / Indikator 01.5</div><div class="pageEyebrow">PKKS · Komponen 01 (Kepribadian dan Sosial)</div><h1 class="pageTitle">Notulen dan Daftar Hadir Rapat (01.5)</h1><p class="pageLead">Pilih salah satu jadwal rapat di bawah ini untuk langsung menampilkan dokumen notulen dan daftar hadir secara penuh.</p>
 
-<!-- Tombol Pilihan Rapat (Kecil, Rapi, Berisi Gambar Mini) -->
+<!-- Tombol Pilihan Rapat -->
 <div class="rapatNav">
   <button class="rapatBtn active" onclick="showRapat('juli', this)">
     <img src="assets/logo.jpg" class="rapatThumbSmall" alt="Rapat Juli"> Rapat Dinas Bulan Juli
@@ -35,20 +37,31 @@
   </button>
 </div>
 
-<!-- Kotak Viewer PDF di Bawah (Muncul Otomatis Saat Tombol Diklik) -->
+<!-- Kotak Viewer PDF Rapat Juli -->
 <div id="viewer-juli" class="viewerContainer active">
-  <div class="viewerTitle">📄 Dokumen Rapat Dinas Bulan Juli</div>
-  <iframe src="assets/manajemen/01.5/rapat_juli.pdf" class="pdfFrame"></iframe>
+  <div class="viewerTitle">
+    <span>📄 Dokumen Rapat Dinas Bulan Juli</span>
+    <a class="pdfDownloadLink" href="assets/manajemen/01.5/rapat_juli.pdf" download>Unduh PDF ⬇</a>
+  </div>
+  <iframe id="frame-juli" class="pdfFrame" title="Rapat Juli"></iframe>
 </div>
 
+<!-- Kotak Viewer PDF Rapat September -->
 <div id="viewer-september" class="viewerContainer">
-  <div class="viewerTitle">📄 Dokumen Rapat Dinas Bulan September</div>
-  <iframe src="assets/manajemen/01.5/rapat_september.pdf" class="pdfFrame"></iframe>
+  <div class="viewerTitle">
+    <span>📄 Dokumen Rapat Dinas Bulan September</span>
+    <a class="pdfDownloadLink" href="assets/manajemen/01.5/rapat_september.pdf" download>Unduh PDF ⬇</a>
+  </div>
+  <iframe id="frame-september" class="pdfFrame" title="Rapat September"></iframe>
 </div>
 
+<!-- Kotak Viewer PDF Rapat Oktober -->
 <div id="viewer-oktober" class="viewerContainer">
-  <div class="viewerTitle">📄 Dokumen Rapat Dinas Bulan Oktober</div>
-  <iframe src="assets/manajemen/01.5/rapat_oktober.pdf" class="pdfFrame"></iframe>
+  <div class="viewerTitle">
+    <span>📄 Dokumen Rapat Dinas Bulan Oktober</span>
+    <a class="pdfDownloadLink" href="assets/manajemen/01.5/rapat_oktober.pdf" download>Unduh PDF ⬇</a>
+  </div>
+  <iframe id="frame-oktober" class="pdfFrame" title="Rapat Oktober"></iframe>
 </div>
 
 <div class="actionRow">
@@ -69,5 +82,25 @@ function showRapat(bulan, btnElement) {
   // Aktifkan tombol yang diklik
   btnElement.classList.add('active');
 }
+
+// Otomatis merakit link PDF.js ke dalam iframe masing-masing saat halaman dimuat
+document.addEventListener("DOMContentLoaded", function() {
+    const files = {
+        'juli': 'assets/manajemen/01.5/rapat_juli.pdf',
+        'september': 'assets/manajemen/01.5/rapat_september.pdf',
+        'oktober': 'assets/manajemen/01.5/rapat_oktober.pdf'
+    };
+
+    for (let key in files) {
+        let pdfPath = files[key];
+        let fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfPath;
+        let viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+        
+        let iframe = document.getElementById('frame-' + key);
+        if (iframe) {
+            iframe.src = viewerUrl;
+        }
+    }
+});
 </script>
 <script src="script.js"></script></body></html>
