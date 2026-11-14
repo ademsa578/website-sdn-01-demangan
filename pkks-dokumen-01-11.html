@@ -35,7 +35,7 @@
   .pdfFrameWrapperFull{height:550px}
   .pkksWrap{padding-top:34px}
 }
-</style></head><body><div class="announcement"><span>✦ SDN 01 DEMANGAN</span><span>Smart School • Karakter • Prestasi</span></div><header><div class="nav"><a class="brand" href="index.html"><span class="brandMark"><img alt="Logo SDN 01 Demangan" src="assets/logo.jpg"></span><div><b>SDN 01 DEMANGAN</b><small>SMART SCHOOL</small></div></a><button id="menu">☰</button><nav class="siteNav"><a data-page="home" href="index.html">Home</a><a data-page="profil" href="profil.html">Profil</a><a data-page="program" href="program.html">Program</a><a data-page="ekstrakurikuler" href="ekstrakurikuler.html">Ekstrakurikuler</a><a data-page="berita" href="berita.html">Berita</a><a data-page="prestasi" href="prestasi.html">Prestasi</a><a class="active" data-page="pkks" href="pkks.html">PKKS</a><a data-page="galeri" href="galeri.html">Galeri</a><a data-page="pengaduan" href="layanan-pengaduan.html">Layanan Pengaduan dan Aspirasi</a></nav><a class="navbtn" href="kontak.html">Kontak ↗</a></div></header><main><section class="pkksWrap"><div class="crumb"><a href="index.html">Beranda</a> / <a href="pkks.html">PKKS</a> / Komponen 01 / 01.11</div><div class="pageEyebrow">PKKS · Komponen 01</div><article class="docPanel"><div class="docIcon">🤝</div><div class="pageEyebrow">Dokumen 01.11</div><h2>MoU dengan Pihak Lain</h2><p>Pilih salah satu instansi/mitra di bawah ini untuk menampilkan pratinjau dokumen Nota Kesepahaman (*MoU*) secara langsung di layar.</p>
+</style></head><body><div class="announcement"><span>✦ SDN 01 DEMANGAN</span><span>Smart School • Karakter • Prestasi</span></div><header><div class="nav"><a class="brand" href="index.html"><span class="brandMark"><img alt="Logo SDN 01 Demangan" src="assets/logo.jpg"></span><div><b>SDN 01 DEMANGAN</b><small>SMART SCHOOL</small></div></a><button id="menu">☰</button><nav class="siteNav"><a data-page="home" href="index.html">Home</a><a data-page="profil" href="profil.html">Profil</a><a data-page="program" href="program.html">Program</a><a data-page="ekstrakurikuler" href="ekstrakurikuler.html">Ekstrakurikuler</a><a data-page="berita" href="berita.html">Berita</a><a data-page="prestasi" href="prestasi.html">Prestasi</a><a class="active" data-page="pkks" href="pkks.html">PKKS</a><a data-page="galeri" href="galeri.html">Galeri</a><a data-page="pengaduan" href="layanan-pengaduan.html">Layanan Pengaduan dan Aspirasi</a></nav><a class="navbtn" href="kontak.html">Kontak ↗</a></div></header><main><section class="pkksWrap"><div class="crumb"><a href="index.html">Beranda</a> / <a href="pkks.html">PKKS</a> / Komponen 01 / 01.11</div><div class="pageEyebrow">PKKS · Komponen 01</div><article class="docPanel"><div class="docIcon">🤝</div><div class="pageEyebrow">Dokumen 01.11</div><h2>MoU dengan Pihak Lain</h2><p>Pilih salah satu instansi/mitra di bawah ini untuk menampilkan pratinjau dokumen Nota Kesepahaman (<i>MoU</i>) secara langsung di layar.</p>
 
 <!-- Tab Pilihan 5 MoU Sesuai File GitHub (3 Atas, 2 Bawah Center) -->
 <div class="pdfTabContainer">
@@ -83,20 +83,41 @@
 <div class="pdfFullCard">
   <div class="pdfHeaderRow">
     <div class="pdfHeaderTitle"><span id="activeDocIcon">📄</span> <span id="activeDocTitle">MoU Kerjasama - RT 06</span></div>
-    <a id="downloadPdfBtn" class="pdfDownloadBtn" href="assets/uploads/mou/mou-rt-06.pdf" target="_blank">Unduh File Original PDF ↗</a>
+    <a id="downloadPdfBtn" class="pdfDownloadBtn" href="assets/uploads/mou/mou-rt-06.pdf" download>Unduh File PDF ⬇</a>
   </div>
   <div class="pdfFrameWrapperFull">
-    <iframe id="pdfFrame" src="assets/uploads/mou/mou-rt-06.pdf" title="Pratinjau Dokumen MoU"></iframe>
+    <iframe id="pdfFrame" title="Pratinjau Dokumen MoU"></iframe>
   </div>
 </div>
 
 <div class="actionRow"><a class="actionLink secondary" href="pkks.html">← Kembali ke semua komponen PKKS</a></div></article></section></main><footer><div class="wrap"><b>SDN 01 DEMANGAN</b><span>© 2026 · SDN 01 Demangan V31</span></div></footer><script src="script.js"></script><script>
-// Fungsi interaktif untuk berpindah pratinjau PDF MoU
+// Fungsi interaktif untuk berpindah pratinjau PDF MoU dengan Mozilla PDF.js Viewer
 function switchPdf(fileUrl, title, btnElement) {
-  document.querySelectorAll('.pdfTabBtn').forEach(b => b.classList.remove('active'));
-  btnElement.classList.add('active');
-  document.getElementById('pdfFrame').src = fileUrl;
-  document.getElementById('activeDocTitle').textContent = title;
-  document.getElementById('downloadPdfBtn').href = fileUrl;
+    document.querySelectorAll('.pdfTabBtn').forEach(b => b.classList.remove('active'));
+    btnElement.classList.add('active');
+    
+    // Konversi URL relatif menjadi absolute URL untuk PDF.js
+    let fullUrl = fileUrl;
+    if (!fileUrl.startsWith('http')) {
+        fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + fileUrl;
+    }
+    
+    let viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+    
+    document.getElementById('pdfFrame').src = viewerUrl;
+    document.getElementById('activeDocTitle').textContent = title;
+    document.getElementById('downloadPdfBtn').href = fileUrl;
 }
+
+// Otomatis muat file pertama (RT 06) saat halaman dibuka
+document.addEventListener("DOMContentLoaded", function() {
+    const defaultFile = 'assets/uploads/mou/mou-rt-06.pdf';
+    let fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + defaultFile;
+    let viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+    
+    const iframe = document.getElementById('pdfFrame');
+    if (iframe) {
+        iframe.src = viewerUrl;
+    }
+});
 </script></body></html>
