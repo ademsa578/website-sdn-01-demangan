@@ -1,9 +1,8 @@
 /* =====================================================
    WEBSITE SDN 01 DEMANGAN
    SCRIPT.JS - RESPONSIVE HP & LAPTOP
-   PDF.JS - TAMPILAN VERTICAL MENYAMBUNG KE BAWAH
+   PDF.JS - VERTICAL CONTINUOUS SCROLL (TERPISAH & TIDAK TERCAMPUR)
 ===================================================== */
-
 
 /* =====================================================
    1. NAVIGASI & MENU MOBILE
@@ -39,36 +38,19 @@ const input = document.getElementById("aiInput");
 const chatBody = document.querySelector(".aiBody");
 
 if (aiButton && aiBox) {
-    aiButton.onclick = () => {
-        aiBox.style.display = "block";
-    };
+    aiButton.onclick = () => { aiBox.style.display = "block"; };
 }
 
 if (closeAI && aiBox) {
-    closeAI.onclick = () => {
-        aiBox.style.display = "none";
-    };
+    closeAI.onclick = () => { aiBox.style.display = "none"; };
 }
 
 function answer(q) {
     q = q.toLowerCase();
-
-    if (q.includes("profil")) {
-        return "Profil sekolah dapat diisi dengan sejarah, visi-misi, kepala sekolah, guru, dan identitas resmi SDN 01 Demangan.";
-    }
-
-    if (q.includes("program")) {
-        return "Program unggulan pada template: Adiwiyata, PMR, PUSAKA PJOK, dan Kembang Krambil.";
-    }
-
-    if (q.includes("ppdb") || q.includes("spmb")) {
-        return "Bagian SPMB/PPDB dapat diarahkan ke halaman informasi dan formulir resmi sekolah.";
-    }
-
-    if (q.includes("kontak")) {
-        return "Kontak resmi sekolah dapat ditambahkan di bagian Kontak setelah data diberikan.";
-    }
-
+    if (q.includes("profil")) return "Profil sekolah dapat diisi dengan sejarah, visi-misi, kepala sekolah, guru, dan identitas resmi SDN 01 Demangan.";
+    if (q.includes("program")) return "Program unggulan pada template: Adiwiyata, PMR, PUSAKA PJOK, dan Kembang Krambil.";
+    if (q.includes("ppdb") || q.includes("spmb")) return "Bagian SPMB/PPDB dapat diarahkan ke halaman informasi dan formulir resmi sekolah.";
+    if (q.includes("kontak")) return "Kontak resmi sekolah dapat ditambahkan di bagian Kontak setelah data diberikan.";
     return "Terima kasih! Saya adalah Demangan AI. Jawaban dan data sekolah dapat kita sambungkan ke informasi resmi pada tahap berikutnya.";
 }
 
@@ -91,9 +73,7 @@ if (send && input && chatBody) {
         chatBody.scrollTop = chatBody.scrollHeight;
     };
 
-    input.onkeydown = e => {
-        if (e.key === "Enter") send.click();
-    };
+    input.onkeydown = e => { if (e.key === "Enter") send.click(); };
 
     document.querySelectorAll(".chips button").forEach(button => {
         button.onclick = () => {
@@ -111,9 +91,7 @@ if (send && input && chatBody) {
 const bot = document.getElementById("heroAI");
 
 if (bot) {
-    let drag = false;
-    let offsetX = 0;
-    let offsetY = 0;
+    let drag = false, offsetX = 0, offsetY = 0;
 
     bot.addEventListener("pointerdown", e => {
         drag = true;
@@ -131,7 +109,6 @@ if (bot) {
 
     bot.addEventListener("pointermove", e => {
         if (!drag) return;
-
         let x = e.clientX - offsetX;
         let y = e.clientY - offsetY;
 
@@ -149,15 +126,12 @@ if (bot) {
 
     bot.addEventListener("pointerup", stopDocDrag);
     bot.addEventListener("pointercancel", stopDocDrag);
-
-    bot.addEventListener("dblclick", () => {
-        if (aiBox) aiBox.style.display = "block";
-    });
+    bot.addEventListener("dblclick", () => { if (aiBox) aiBox.style.display = "block"; });
 }
 
 
 /* =====================================================
-   4. PDF VIEWER VERTICAL CONTINUOUS SCROLL
+   4. PDF VIEWER VERTICAL CONTINUOUS (TERPISAH & BERSIH)
 ===================================================== */
 
 let pdfLibrary = null;
@@ -178,9 +152,6 @@ async function loadPDFLibrary() {
     return await pdfLibrary;
 }
 
-
-/* STYLING CSS UNTUK TAMPILAN KE BAWAH (VERTICAL STACK) */
-
 function installPDFStyles() {
     if (document.getElementById("globalPDFStyles")) return;
 
@@ -200,7 +171,6 @@ function installPDFStyles() {
             border-radius: 12px;
             overflow: hidden;
         }
-
         .pdfjs-toolbar {
             display: flex;
             align-items: center;
@@ -210,24 +180,11 @@ function installPDFStyles() {
             color: white;
             box-sizing: border-box;
         }
-
-        .pdfjs-toolbar button {
-            border: none;
-            border-radius: 6px;
-            padding: 8px 14px;
-            background: white;
-            color: #102c46;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
         .pdfjs-page-info {
             color: white;
             font-size: 13px;
             font-weight: 600;
         }
-
-        /* AREA KONTAINER KE BAWAH */
         .pdfjs-canvas-area {
             display: block;
             width: 100%;
@@ -239,16 +196,13 @@ function installPDFStyles() {
             box-sizing: border-box;
             -webkit-overflow-scrolling: touch;
         }
-
-        /* SUSUNAN HALAMAN MENYAMBUNG KE BAWAH */
         .pdfjs-page-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px; /* Jarak antar halaman PDF */
+            gap: 15px;
             width: 100%;
         }
-
         .pdfjs-canvas {
             display: block;
             max-width: 100% !important;
@@ -257,21 +211,21 @@ function installPDFStyles() {
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             border-radius: 4px;
         }
-
         .pdfjs-status {
             padding: 30px;
             color: #334155;
             text-align: center;
             font-size: 14px;
         }
-
         .pdfjs-download {
             background: #087f68 !important;
             color: white !important;
             text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
         }
-
-        /* POPUP FULLSCREEN PDF */
         #pdfViewerBox {
             position: fixed;
             inset: 0;
@@ -280,18 +234,15 @@ function installPDFStyles() {
             flex-direction: column;
             background: #e2e8f0;
         }
-
         #pdfViewerBox.active {
             display: flex;
         }
-
         #pdfViewerBox .pdfjs-inline-viewer {
             flex: 1 1 auto !important;
             margin: 0 !important;
             border: none;
             border-radius: 0;
         }
-
         #pdfViewerBox .pdfjs-canvas-area {
             flex: 1;
             max-height: none;
@@ -300,9 +251,6 @@ function installPDFStyles() {
 
     document.head.appendChild(style);
 }
-
-
-/* MEMBUAT KOMPONEN RENDER SEMUA HALAMAN BERURUTAN KE BAWAH */
 
 function createPDFPanel(pdfUrl, titleText) {
     const panel = document.createElement("div");
@@ -314,7 +262,7 @@ function createPDFPanel(pdfUrl, titleText) {
             <a class="pdfjs-download" href="${pdfUrl}" target="_blank" download>Unduh File PDF</a>
         </div>
         <div class="pdfjs-canvas-area">
-            <div class="pdfjs-status">Memuat semua halaman dokumen...</div>
+            <div class="pdfjs-status">Memuat dokumen: ${titleText}</div>
             <div class="pdfjs-page-container"></div>
         </div>
     `;
@@ -337,17 +285,16 @@ function createPDFPanel(pdfUrl, titleText) {
         return Math.max(100, area.clientWidth - padding);
     }
 
-    /* RENDER SEMUA HALAMAN SEKALIGUS SECARA BERURUTAN KE BAWAH */
     async function renderAllPages() {
         if (!state.document || state.destroyed) return;
         if (area.clientWidth < 50) return;
 
         const availableWidth = getAvailableWidth();
-        container.innerHTML = ""; // Bersihkan sebelum render ulang
+        container.innerHTML = "";
 
         try {
             const totalPages = state.document.numPages;
-            pageInfo.textContent = "Total " + totalPages + " Halaman (Scroll ke bawah)";
+            pageInfo.textContent = titleText + " (" + totalPages + " Halaman)";
             status.style.display = "none";
 
             for (let i = 1; i <= totalPages; i++) {
@@ -386,7 +333,6 @@ function createPDFPanel(pdfUrl, titleText) {
         }
     }
 
-    /* AUTO ADJUST KETIKA LAYAR DI-RESIZE */
     if ("ResizeObserver" in window) {
         state.resizeObserver = new ResizeObserver(() => {
             if (!state.document || state.destroyed || area.clientWidth < 50) return;
@@ -412,7 +358,7 @@ function createPDFPanel(pdfUrl, titleText) {
             console.error("Gagal membuka PDF:", error);
             if (!state.destroyed) {
                 status.style.display = "block";
-                status.innerHTML = "Dokumen gagal dimuat. Periksa koneksi atau file PDF.";
+                status.innerHTML = "Dokumen gagal dimuat. Periksa file PDF.";
                 pageInfo.textContent = "Gagal memuat";
             }
         }
@@ -430,12 +376,6 @@ function createPDFPanel(pdfUrl, titleText) {
         element: panel,
         destroy: destroy
     };
-}
-
-function escapePDFText(text) {
-    const div = document.createElement("div");
-    div.textContent = String(text);
-    return div.innerHTML;
 }
 
 function resolvePDFUrl(url) {
@@ -509,22 +449,12 @@ window.showPdf = function(pdfUrl, titleText, element) {
 };
 
 
-/* KONVERSI OTOMATIS IFRAME DI SEMUA HALAMAN */
+/* KONVERSI IFRAME TUNGGAL PER HALAMAN (MASING-MASING BERDIRI SENDIRI) */
 
 function convertOldPDFFrames() {
     installPDFStyles();
 
-    document.querySelectorAll(".pdfFrameWrapperFull").forEach(wrapper => {
-        const iframe = wrapper.querySelector("iframe");
-        if (!iframe || iframe.getAttribute("src")) return;
-
-        const downloadButton = wrapper.closest(".pdfFullCard")?.querySelector(".pdfDownloadBtn");
-        if (downloadButton) {
-            const pdfUrl = downloadButton.getAttribute("href");
-            if (pdfUrl) iframe.setAttribute("src", pdfUrl);
-        }
-    });
-
+    // Hanya merender iframe tunggal yang spesifik memuat file PDF miliknya sendiri
     document.querySelectorAll("iframe").forEach(iframe => {
         if (iframe.dataset.pdfjsConverted === "true") return;
         const source = iframe.getAttribute("src");
@@ -544,8 +474,11 @@ function convertOldPDFFrames() {
 
         if (!isPDF) return;
 
+        // Ambil judul dari title iframe atau dokumen terdekat agar tidak tertukar
+        let docTitle = iframe.getAttribute("title") || "Dokumen Arsip";
         const fullUrl = resolvePDFUrl(source);
-        const panel = createPDFPanel(fullUrl, "Dokumen PKKS");
+        
+        const panel = createPDFPanel(fullUrl, docTitle);
         iframe.dataset.pdfjsConverted = "true";
         iframe.replaceWith(panel.element);
     });
