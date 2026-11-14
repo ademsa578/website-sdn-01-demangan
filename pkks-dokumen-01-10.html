@@ -12,7 +12,7 @@
 .photoCaption{font-size:13px;color:#64748b;margin-top:10px}
 
 /* Tombol Akses File RKAS (.pdf) */
-.rkasBox{background:white;border:1px solid #cbd5e1;border-radius:16px;padding:24px;box-shadow:0 10px 25px #0f172a0a;display:flex;align-items:center;justify-content:between;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.rkasBox{background:white;border:1px solid #cbd5e1;border-radius:16px;padding:24px;box-shadow:0 10px 25px #0f172a0a;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:30px}
 .rkasInfo{display:flex;align-items:center;gap:16px}
 .rkasIcon{font-size:40px}
 .rkasTitle{font:700 16px Manrope,sans-serif;color:#0f172a}
@@ -38,7 +38,7 @@
 .actionLink{display:inline-block;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:700;font-size:14px}
 .actionLink.primary{background:#087f68;color:white}
 .actionLink.secondary{background:#eef2f7;color:#334155}
-</style></head><body><div class="announcement"><span>✦ SDN 01 DEMANGAN</span><span>Smart School • Karakter • Prestasi</span></div><header><div class="nav"><a class="brand" href="index.html"><span class="brandMark"><img alt="Logo SDN 01 Demangan" src="assets/logo.jpg"></span><div><b>SDN 01 DEMANGAN</b><small>SMART SCHOOL</small></div></a><button id="menu">☰</button><nav class="siteNav"><a data-page="home" href="index.html">Home</a><a data-page="profil" href="profil.html">Profil</a><a data-page="program" href="program.html">Program</a><a data-page="ekstrakurikuler" href="ekstrakurikuler.html">Ekstrakurikuler</a><a data-page="berita" href="berita.html">Berita</a><a data-page="prestasi" href="prestasi.html">Prestasi</a><a class="active" data-page="pkks" href="pkks.html">PKKS</a><a data-page="galeri" href="galeri.html">Galeri</a></nav><a class="navbtn" href="kontak.html">Kontak ↗</a></div></header><main><section class="pkksWrap"><div class="crumb"><a href="index.html">Beranda</a> / <a href="pkks.html">PKKS</a> / Indikator 01.10</div><div class="pageEyebrow">PKKS · Komponen 01</div><h1 class="pageTitle">Media Publikasi Keuangan Sekolah (01.10)</h1><p class="pageLead">Dokumentasi media publikasi transparansi pengelolaan keuangan dan RKAS SDN 01 Demangan.</p>
+</style></head><body><div class="announcement"><span>✦ SDN 01 DEMANGAN</span><span>Smart School • Karakter • Prestasi</span></div><header><div class="nav"><a class="brand" href="index.html"><span class="brandMark"><img alt="Logo SDN 01 Demangan" src="assets/logo.jpg"></span><div><b>SDN 01 DEMANGAN</b><small>SMART SCHOOL</small></div></a><button id="menu">☰</button><nav class="siteNav"><a data-page="home" href="index.html">Home</a><a data-page="profil" href="profil.html">Profil</a><a data-page="program" href="index.html">Program</a><a data-page="ekstrakurikuler" href="ekstrakurikuler.html">Ekstrakurikuler</a><a data-page="berita" href="berita.html">Berita</a><a data-page="prestasi" href="prestasi.html">Prestasi</a><a class="active" data-page="pkks" href="pkks.html">PKKS</a><a data-page="galeri" href="galeri.html">Galeri</a></nav><a class="navbtn" href="kontak.html">Kontak ↗</a></div></header><main><section class="pkksWrap"><div class="crumb"><a href="index.html">Beranda</a> / <a href="pkks.html">PKKS</a> / Indikator 01.10</div><div class="pageEyebrow">PKKS · Komponen 01</div><h1 class="pageTitle">Media Publikasi Keuangan Sekolah (01.10)</h1><p class="pageLead">Dokumentasi media publikasi transparansi pengelolaan keuangan dan RKAS SDN 01 Demangan.</p>
 
 <!-- Bagian 1: Foto Publikasi (.png) -->
 <div class="sectionSubHeader">🖼️ Foto Media Publikasi Keuangan</div>
@@ -59,7 +59,7 @@
       <div class="rkasSub">Dokumen resmi Rencana Kegiatan dan Anggaran Sekolah</div>
     </div>
   </div>
-  <button class="rkasBtn" onclick="togglePdf('assets/publikasi/File_RKAS.pdf', 'Dokumen RKAS Keuangan Sekolah')">
+  <button class="rkasBoxBtn" onclick="togglePdf('assets/publikasi/File_RKAS.pdf', 'Dokumen RKAS Keuangan Sekolah')">
     👁️ Lihat Dokumen RKAS ↓
   </button>
 </div>
@@ -70,7 +70,7 @@
     <span id="pdfTitleText">Memuat Dokumen...</span>
     <span style="font-size:13px; color:#087f68; cursor:pointer;" onclick="closePdf()">Tutup [✕]</span>
   </div>
-  <iframe id="pdfFrame" class="pdfIframe" src=""></iframe>
+  <iframe id="pdfFrame" class="pdfIframe" title="Dokumen RKAS"></iframe>
 </div>
 
 <!-- Lightbox Modal Viewer Gambar -->
@@ -107,12 +107,19 @@ function togglePdf(pdfUrl, titleText) {
   const pdfFrame = document.getElementById('pdfFrame');
   const titleTextEl = document.getElementById('pdfTitleText');
 
-  if (viewerBox.classList.contains('active') && pdfFrame.src.includes(pdfUrl)) {
+  if (viewerBox.classList.contains('active')) {
     closePdf();
     return;
   }
 
-  pdfFrame.src = pdfUrl;
+  // Konversi URL relatif menjadi absolute URL untuk Mozilla PDF.js
+  let fullUrl = pdfUrl;
+  if (!pdfUrl.startsWith('http')) {
+      fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfUrl;
+  }
+  let viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+
+  pdfFrame.src = viewerUrl;
   titleTextEl.innerText = "📁 " + titleText;
   viewerBox.classList.add('active');
   viewerBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
