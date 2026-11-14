@@ -1,8 +1,8 @@
 
 /* =====================================================
    WEBSITE SDN 01 DEMANGAN
-   SCRIPT.JS - VERSI RESPONSIVE HP & LAPTOP
-   PDF VIEWER GLOBAL MENGGUNAKAN PDF.JS
+   SCRIPT.JS - RESPONSIVE HP & LAPTOP
+   PDF.JS - TAMPILAN SATU KOLOM DAN AUTO FIT
 ===================================================== */
 
 
@@ -85,13 +85,11 @@ if (send && input && chatBody) {
         const userMessage = document.createElement("div");
         userMessage.className = "userMsg";
         userMessage.textContent = q;
-
         chatBody.appendChild(userMessage);
 
         const aiAnswer = document.createElement("div");
         aiAnswer.className = "aiAnswer";
         aiAnswer.textContent = answer(q);
-
         chatBody.appendChild(aiAnswer);
 
         input.value = "";
@@ -99,9 +97,7 @@ if (send && input && chatBody) {
     };
 
     input.onkeydown = e => {
-        if (e.key === "Enter") {
-            send.click();
-        }
+        if (e.key === "Enter") send.click();
     };
 
     document.querySelectorAll(".chips button").forEach(button => {
@@ -126,7 +122,6 @@ if (bot) {
 
     bot.addEventListener("pointerdown", e => {
         drag = true;
-
         bot.classList.add("dragging");
         bot.setPointerCapture(e.pointerId);
 
@@ -174,7 +169,6 @@ if (bot) {
 
 /* =====================================================
    4. PDF VIEWER GLOBAL RESPONSIVE
-   UNTUK SEMUA HALAMAN PKKS
 ===================================================== */
 
 
@@ -185,7 +179,6 @@ let pdfLibrary = null;
 async function loadPDFLibrary() {
 
     if (!pdfLibrary) {
-
         pdfLibrary = import(
             "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs"
         ).then(pdfjs => {
@@ -196,10 +189,8 @@ async function loadPDFLibrary() {
             return pdfjs;
 
         }).catch(error => {
-
             pdfLibrary = null;
             throw error;
-
         });
     }
 
@@ -214,28 +205,43 @@ function installPDFStyles() {
     if (document.getElementById("globalPDFStyles")) return;
 
     const style = document.createElement("style");
-
     style.id = "globalPDFStyles";
 
     style.textContent = `
 
+        /* KOTAK UTAMA PDF */
+
         .pdfjs-inline-viewer {
-            width: 100%;
-            min-width: 0;
-            margin: 15px auto;
+            display: flex;
+            flex-direction: column;
+
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+
+            flex: 0 0 100% !important;
+            grid-column: 1 / -1 !important;
+
+            margin: 15px 0 !important;
+            box-sizing: border-box;
+
             background: #e2e8f0;
             border: 1px solid #cbd5e1;
             border-radius: 12px;
             overflow: hidden;
         }
 
+        /* TOOLBAR */
+
         .pdfjs-toolbar {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 8px;
-            padding: 12px;
+            gap: 7px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
             background: #102c46;
             color: white;
         }
@@ -243,7 +249,7 @@ function installPDFStyles() {
         .pdfjs-toolbar button {
             border: none;
             border-radius: 6px;
-            padding: 9px 13px;
+            padding: 9px 12px;
             background: white;
             color: #102c46;
             font-weight: 700;
@@ -259,26 +265,38 @@ function installPDFStyles() {
             color: white;
             font-size: 13px;
             font-weight: 600;
-            padding: 5px 8px;
+            padding: 5px;
         }
 
+        /* AREA HALAMAN PDF */
+
         .pdfjs-canvas-area {
+            display: block;
             width: 100%;
+            max-width: 100%;
+            min-width: 0;
             max-height: 75vh;
+
             overflow: auto;
-            padding: 12px;
+            padding: 10px;
+
             text-align: center;
             background: #e2e8f0;
             box-sizing: border-box;
+
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
         }
 
+        /* HALAMAN PDF */
+
         .pdfjs-canvas {
             display: block;
-            max-width: none;
+            width: auto;
+            max-width: 100% !important;
             height: auto;
             margin: 0 auto;
+
             background: white;
             box-shadow: 0 2px 12px rgba(0,0,0,.15);
         }
@@ -295,6 +313,8 @@ function installPDFStyles() {
             color: white !important;
         }
 
+        /* POPUP PDF */
+
         #pdfViewerBox {
             position: fixed;
             inset: 0;
@@ -309,11 +329,11 @@ function installPDFStyles() {
         }
 
         #pdfViewerBox .pdfjs-inline-viewer {
-            flex: 1;
+            flex: 1 1 auto !important;
             display: flex;
             flex-direction: column;
             min-height: 0;
-            margin: 0;
+            margin: 0 !important;
             border: none;
             border-radius: 0;
         }
@@ -323,7 +343,17 @@ function installPDFStyles() {
             max-height: none;
         }
 
-        @media(max-width:600px) {
+        /* KHUSUS HP */
+
+        @media (max-width: 600px) {
+
+            .pdfjs-inline-viewer {
+                width: 100% !important;
+                max-width: 100% !important;
+                flex-basis: 100% !important;
+                margin: 12px 0 !important;
+                border-radius: 9px;
+            }
 
             .pdfjs-toolbar {
                 gap: 5px;
@@ -341,14 +371,20 @@ function installPDFStyles() {
             }
 
             .pdfjs-canvas-area {
+                width: 100%;
+                max-width: 100%;
                 padding: 5px;
                 max-height: 70vh;
+            }
+
+            .pdfjs-canvas {
+                max-width: 100% !important;
+                height: auto;
             }
 
             #pdfViewerBox .pdfjs-canvas-area {
                 max-height: none;
             }
-
         }
     `;
 
@@ -361,32 +397,21 @@ function installPDFStyles() {
 function createPDFPanel(pdfUrl, titleText) {
 
     const panel = document.createElement("div");
-
     panel.className = "pdfjs-inline-viewer";
 
     panel.innerHTML = `
 
         <div class="pdfjs-toolbar">
 
-            <button type="button" data-action="prev">
-                ◀
-            </button>
+            <button type="button" data-action="prev">◀</button>
 
-            <span class="pdfjs-page-info">
-                Memuat...
-            </span>
+            <span class="pdfjs-page-info">Memuat...</span>
 
-            <button type="button" data-action="next">
-                ▶
-            </button>
+            <button type="button" data-action="next">▶</button>
 
-            <button type="button" data-action="minus">
-                −
-            </button>
+            <button type="button" data-action="minus">−</button>
 
-            <button type="button" data-action="plus">
-                +
-            </button>
+            <button type="button" data-action="plus">+</button>
 
             <button type="button"
                     class="pdfjs-download"
@@ -429,8 +454,24 @@ function createPDFPanel(pdfUrl, titleText) {
         task: null,
         loadingTask: null,
         renderNumber: 0,
-        destroyed: false
+        destroyed: false,
+        lastWidth: 0,
+        resizeObserver: null
     };
+
+
+    /* MENGHITUNG LEBAR AREA PDF */
+
+    function getAvailableWidth() {
+
+        const style = window.getComputedStyle(area);
+
+        const padding =
+            parseFloat(style.paddingLeft || 0) +
+            parseFloat(style.paddingRight || 0);
+
+        return Math.max(100, area.clientWidth - padding);
+    }
 
 
     /* RENDER HALAMAN PDF */
@@ -438,6 +479,17 @@ function createPDFPanel(pdfUrl, titleText) {
     async function renderPage() {
 
         if (!state.document || state.destroyed) return;
+
+        /*
+           Jika panel sedang tersembunyi,
+           tunggu sampai panel dibuka.
+        */
+
+        if (area.clientWidth < 50) return;
+
+        const availableWidth = getAvailableWidth();
+
+        if (availableWidth < 50) return;
 
         const renderNumber = ++state.renderNumber;
 
@@ -451,14 +503,15 @@ function createPDFPanel(pdfUrl, titleText) {
 
             const page = await state.document.getPage(state.page);
 
-            if (state.destroyed || renderNumber !== state.renderNumber) return;
+            if (state.destroyed ||
+                renderNumber !== state.renderNumber) return;
 
             const original = page.getViewport({ scale: 1 });
 
-            const availableWidth = Math.max(
-                200,
-                area.clientWidth - 16
-            );
+            /*
+               FIT WIDTH:
+               PDF menyesuaikan lebar kotak.
+            */
 
             const fitScale = availableWidth / original.width;
 
@@ -499,12 +552,13 @@ function createPDFPanel(pdfUrl, titleText) {
                     0, pixelRatio,
                     0, 0
                 ]
-
             });
 
             await state.task.promise;
 
             if (renderNumber !== state.renderNumber) return;
+
+            state.lastWidth = availableWidth;
 
         } catch (error) {
 
@@ -512,6 +566,31 @@ function createPDFPanel(pdfUrl, titleText) {
                 console.error("PDF rendering error:", error);
             }
         }
+    }
+
+
+    /* MENYESUAIKAN PDF KETIKA KOTAK BERUBAH UKURAN */
+
+    if ("ResizeObserver" in window) {
+
+        state.resizeObserver = new ResizeObserver(() => {
+
+            if (!state.document || state.destroyed) return;
+
+            if (area.clientWidth < 50) return;
+
+            const newWidth = getAvailableWidth();
+
+            if (Math.abs(newWidth - state.lastWidth) > 2) {
+                renderPage();
+            }
+        });
+
+        state.resizeObserver.observe(area);
+
+    } else {
+
+        window.addEventListener("resize", renderPage);
     }
 
 
@@ -536,6 +615,9 @@ function createPDFPanel(pdfUrl, titleText) {
             if (state.destroyed) return;
 
             state.page = 1;
+
+            pageInfo.textContent =
+                "Halaman 1 / " + state.document.numPages;
 
             await renderPage();
 
@@ -579,13 +661,11 @@ function createPDFPanel(pdfUrl, titleText) {
     };
 
     plus.onclick = () => {
-
         state.zoom = Math.min(state.zoom + 0.2, 3);
         renderPage();
     };
 
     minus.onclick = () => {
-
         state.zoom = Math.max(state.zoom - 0.2, 0.5);
         renderPage();
     };
@@ -593,7 +673,6 @@ function createPDFPanel(pdfUrl, titleText) {
     download.onclick = () => {
 
         const link = document.createElement("a");
-
         link.href = pdfUrl;
         link.download = "";
 
@@ -609,6 +688,12 @@ function createPDFPanel(pdfUrl, titleText) {
 
         state.destroyed = true;
         state.renderNumber++;
+
+        if (state.resizeObserver) {
+            state.resizeObserver.disconnect();
+        } else {
+            window.removeEventListener("resize", renderPage);
+        }
 
         if (state.task) {
             try {
@@ -630,7 +715,8 @@ function createPDFPanel(pdfUrl, titleText) {
 
     return {
         element: panel,
-        destroy: destroy
+        destroy: destroy,
+        render: renderPage
     };
 }
 
@@ -640,7 +726,6 @@ function createPDFPanel(pdfUrl, titleText) {
 function escapePDFText(text) {
 
     const div = document.createElement("div");
-
     div.textContent = String(text);
 
     return div.innerHTML;
@@ -653,7 +738,6 @@ function resolvePDFUrl(url) {
 
     let fullUrl = new URL(url, document.baseURI);
 
-    // Mendukung URL PDF.js lama dari Mozilla
     if (fullUrl.hostname === "mozilla.github.io") {
 
         const originalPDF = fullUrl.searchParams.get("file");
@@ -667,7 +751,7 @@ function resolvePDFUrl(url) {
 }
 
 
-/* F. MEMBUAT VIEWER POPUP GLOBAL */
+/* F. POPUP PDF GLOBAL */
 
 function createGlobalPDFViewer() {
 
@@ -676,7 +760,6 @@ function createGlobalPDFViewer() {
     if (viewer) return viewer;
 
     viewer = document.createElement("div");
-
     viewer.id = "pdfViewerBox";
 
     viewer.innerHTML = `
@@ -690,9 +773,7 @@ function createGlobalPDFViewer() {
             gap:10px;
         ">
 
-            <strong id="pdfTitleText">
-                Dokumen PKKS
-            </strong>
+            <strong id="pdfTitleText">Dokumen PKKS</strong>
 
             <button type="button"
                     onclick="closeGlobalPdfViewer()"
@@ -734,7 +815,6 @@ window.openGlobalPdfViewer = function(
     installPDFStyles();
 
     const viewer = createGlobalPDFViewer();
-
     const content = document.getElementById("pdfGlobalContent");
 
     if (globalPDFPanel) {
@@ -793,7 +873,7 @@ window.closeGlobalPdfViewer = function() {
 };
 
 
-/* I. FUNGSI SHOWPDF LAMA TETAP DIDUKUNG */
+/* I. FUNGSI SHOWPDF LAMA */
 
 window.showPdf = function(pdfUrl, titleText, element) {
 
@@ -805,13 +885,14 @@ window.showPdf = function(pdfUrl, titleText, element) {
 };
 
 
-/* J. MENGUBAH IFRAME PDF LAMA MENJADI PDF.JS */
+/* J. MENGUBAH IFRAME PDF MENJADI PDF.JS */
 
 function convertOldPDFFrames() {
 
     installPDFStyles();
 
-    // Mengisi iframe kosong dari tombol unduh
+    /* Mengisi iframe kosong dari tombol unduh */
+
     document.querySelectorAll(".pdfFrameWrapperFull").forEach(wrapper => {
 
         const iframe = wrapper.querySelector("iframe");
@@ -833,7 +914,8 @@ function convertOldPDFFrames() {
     });
 
 
-    // Mengubah iframe PDF menjadi viewer PDF.js
+    /* Mengubah iframe PDF */
+
     document.querySelectorAll("iframe").forEach(iframe => {
 
         if (iframe.dataset.pdfjsConverted === "true") return;
@@ -882,7 +964,6 @@ function convertOldPDFFrames() {
 function initializeDemanganWebsite() {
 
     installPDFStyles();
-
     convertOldPDFFrames();
 
 }
@@ -903,5 +984,5 @@ if (document.readyState === "loading") {
 
 /* =====================================================
    5. SELESAI
-   SATU PDF VIEWER UNTUK SELURUH WEBSITE
+   PDF VIEWER RESPONSIVE SDN 01 DEMANGAN
 ===================================================== */
