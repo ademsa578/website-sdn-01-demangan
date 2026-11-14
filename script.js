@@ -1,3 +1,8 @@
+/* =====================================================
+   WEBSITE SDN 01 DEMANGAN
+   SCRIPT.JS - STABIL & AMAN (TIDAK MERUSAK FILE)
+===================================================== */
+
 // --- 1. Navigasi & Menu Mobile ---
 const menu=document.getElementById("menu"),nav=document.querySelector("nav");
 menu.onclick=()=>nav.style.display=nav.style.display==="flex"?"":"flex";
@@ -49,9 +54,9 @@ if(bot){
 }
 
 
-// --- 4. OTOMATISASI GLOBAL UNTUK SEMUA HALAMAN PDF ---
+// --- 4. OTOMATISASI GLOBAL UNTUK SEMUA HALAMAN PDF (AMAN & TERISOLASI) ---
 document.addEventListener("DOMContentLoaded", function() {
-    // A. Tangkap semua iframe yang ada di halaman manapun
+    // A. Tangkap semua iframe yang ada di halaman manapun secara mandiri
     const iframes = document.querySelectorAll('iframe');
     
     iframes.forEach(iframe => {
@@ -71,9 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const wrappers = document.querySelectorAll('.pdfFrameWrapperFull');
     wrappers.forEach(wrapper => {
         let iframe = wrapper.querySelector('iframe');
-        // Jika iframe di dalam wrapper kosong atau belum menggunakan PDF.js
         if (iframe && (!iframe.getAttribute('src') || !iframe.getAttribute('src').includes('mozilla.github.io'))) {
-            // Cari tahu file PDF dari tombol unduh terdekat di halaman tersebut
             let downloadBtn = wrapper.closest('.pdfFullCard')?.querySelector('.pdfDownloadBtn');
             if (downloadBtn) {
                 let pdfUrl = downloadBtn.getAttribute('href');
