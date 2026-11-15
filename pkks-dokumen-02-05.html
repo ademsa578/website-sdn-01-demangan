@@ -7,7 +7,8 @@
 
 <div class="pdfCard">
   <div class="pdfContainer">
-    <iframe class="pdfViewer" src="assets/Hasil_Evaluasi_Program_Sekolah.pdf" type="application/pdf"></iframe>
+    <!-- Diberikan ID agar otomatis dirakit menggunakan Mozilla PDF.js Viewer -->
+    <iframe id="pdfViewerFrame" class="pdfViewer" title="Hasil Evaluasi Program Sekolah"></iframe>
   </div>
   
   <div class="actionRow">
@@ -18,4 +19,18 @@
     <a class="actionLink secondary" href="assets/Hasil_Evaluasi_Program_Sekolah.pdf" target="_blank" download>📥 Unduh PDF ↗</a>
   </div>
 </div>
-</article></section></main><footer><div class="wrap"><b>SDN 01 DEMANGAN</b><span>© 2026 · SDN 01 Demangan V31</span></div></footer><script src="script.js"></script></body></html>
+</article></section></main><footer><div class="wrap"><b>SDN 01 DEMANGAN</b><span>© 2026 · SDN 01 Demangan V31</span></div></footer>
+
+<script>
+// Otomatis merakit link PDF.js agar iframe langsung merender dokumen di dalam halaman
+document.addEventListener("DOMContentLoaded", function() {
+    const pdfPath = "assets/Hasil_Evaluasi_Program_Sekolah.pdf";
+    let fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + pdfPath;
+    let viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+    
+    const iframe = document.getElementById('pdfViewerFrame');
+    if (iframe) {
+        iframe.src = viewerUrl;
+    }
+});
+</script><script src="script.js"></script></body></html>
