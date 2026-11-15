@@ -105,12 +105,19 @@ function switchSDM(key, btn) {
   container.innerHTML = '';
 
   target.files.forEach(item => {
+    // Konversi URL relatif menjadi absolute URL untuk Mozilla PDF.js Viewer
+    let fullUrl = item.url;
+    if (!item.url.startsWith('http')) {
+        fullUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + item.url;
+    }
+    let viewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(fullUrl);
+
     const card = document.createElement('div');
     card.className = 'pdfCardItem';
     card.innerHTML = `
       <div class="pdfItemTitle">${item.name}</div>
       <div class="pdfContainer">
-        <iframe class="pdfViewer" src="${item.url}" type="application/pdf"></iframe>
+        <iframe class="pdfViewer" src="${viewerUrl}" type="application/pdf" title="${item.name}"></iframe>
       </div>
       <a class="btnDownload" href="${item.url}" target="_blank" download>Unduh PDF ↗</a>
     `;
